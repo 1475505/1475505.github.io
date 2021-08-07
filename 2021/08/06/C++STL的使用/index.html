@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>C++ STL使用 | 梦舞星球</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="C++ STL的使用[toc] 序列式容器####vector 元素访问  at() v.at(pos) 返回容器中下标为 pos 的引用。如果数组越界抛出 std::out_of_range 类型的异常。  operator[] v[pos] 返回容器中下标为 pos 的引用。不执行越界检查。  front() v.front() 返回首元素的引用。  back() v.back() 返回末尾元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ STL使用">
+<meta property="og:url" content="http://example.com/2021/08/06/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="梦舞星球">
+<meta property="og:description" content="C++ STL的使用[toc] 序列式容器####vector 元素访问  at() v.at(pos) 返回容器中下标为 pos 的引用。如果数组越界抛出 std::out_of_range 类型的异常。  operator[] v[pos] 返回容器中下标为 pos 的引用。不执行越界检查。  front() v.front() 返回首元素的引用。  back() v.back() 返回末尾元">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-08-06T15:07:15.151Z">
+<meta property="article:modified_time" content="2021-08-06T15:39:46.398Z">
+<meta property="article:author" content="Liuliang">
+<meta property="article:tag" content="C++,语法">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="梦舞星球" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">梦舞星球</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C++STL的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/08/06/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2021-08-06T15:07:15.151Z" itemprop="datePublished">2021-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++ STL使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="C-STL的使用"><a href="#C-STL的使用" class="headerlink" title="C++ STL的使用"></a>C++ STL的使用</h2><p>[toc]</p>
+<h2 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h2><p>####vector</p>
+<p><strong>元素访问</strong></p>
+<ol>
+<li><p><code>at()</code></p>
+<p><code>v.at(pos)</code> 返回容器中下标为 <code>pos</code> 的引用。如果数组越界抛出 <code>std::out_of_range</code> 类型的异常。</p>
+</li>
+<li><p><code>operator[]</code></p>
+<p><code>v[pos]</code> 返回容器中下标为 <code>pos</code> 的引用。不执行越界检查。</p>
+</li>
+<li><p><code>front()</code></p>
+<p><code>v.front()</code> 返回首元素的引用。</p>
+</li>
+<li><p><code>back()</code></p>
+<p><code>v.back()</code> 返回末尾元素的引用。</p>
+</li>
+</ol>
+<p><strong>迭代器</strong></p>
+<ol>
+<li><p><code>begin()/cbegin()</code></p>
+<p>返回指向首元素的迭代器，其中 <code>*begin = front</code>。</p>
+</li>
+<li><p><code>end()/cend()</code></p>
+<p>返回指向数组尾端占位符的迭代器，注意是没有元素的。</p>
+</li>
+</ol>
+<ul>
+<li><p><code>empty()</code> 返回一个 <code>bool</code> 值，即 <code>v.begin() == v.end()</code>，<code>true</code> 为空，<code>false</code> 为非空。</p>
+</li>
+<li><p><code>size()</code> 返回容器长度（元素数量），即 <code>std::distance(v.begin(), v.end())</code>。</p>
+</li>
+<li><p><code>clear()</code> 清除所有元素</p>
+</li>
+<li><p><code>insert()</code> 支持在某个迭代器位置插入元素、可以插入多个。<strong>复杂度与 <code>pos</code> 距离末尾长度成线性而非常数的</strong></p>
+</li>
+<li><p><code>erase()</code> 删除某个迭代器或者区间的元素，返回最后被删除的迭代器。复杂度与 <code>insert</code> 一致。</p>
+</li>
+<li><p><code>push_back()</code> 在末尾插入一个元素，均摊复杂度为 <strong>常数</strong>，最坏为线性复杂度。</p>
+</li>
+<li><p><code>pop_back()</code> 删除末尾元素，常数复杂度。</p>
+</li>
+</ul>
+<h4 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h4><p>操作同<code>vector</code></p>
+<h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><p>与<code>deque</code>大致相同，但是由于 <code>list</code> 的实现是链表，因此不提供随机访问的接口。若需要访问中间元素，则需要使用迭代器。</p>
+<ul>
+<li><p><code>front()</code> 返回首元素的引用。</p>
+</li>
+<li><p><code>back()</code> 返回末尾元素的引用。</p>
+</li>
+</ul>
+<h4 id="array-C-11"><a href="#array-C-11" class="headerlink" title="array(C++11)"></a>array(C++11)</h4><table>
+<thead>
+<tr>
+<th align="left">成员函数</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>operator=</code></td>
+<td align="left">以来自另一 <code>array</code> 的每个元素重写 <code>array</code> 的对应元素</td>
+</tr>
+<tr>
+<td align="left"><code>max_size</code></td>
+<td align="left">返回可容纳的最大元素数</td>
+</tr>
+<tr>
+<td align="left"><code>fill</code></td>
+<td align="left">以指定值填充容器</td>
+</tr>
+<tr>
+<td align="left"><code>swap</code></td>
+<td align="left">交换内容</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">非成员函数</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>operator==</code></td>
+<td align="left">按照字典序比较 <code>array</code> 中的值</td>
+</tr>
+<tr>
+<td align="left"><code>std::get</code></td>
+<td align="left">访问 <code>array</code> 的一个元素</td>
+</tr>
+</tbody></table>
+<h3 id="关联式容器"><a href="#关联式容器" class="headerlink" title="关联式容器"></a>关联式容器</h3><h4 id="set"><a href="#set" class="headerlink" title="set"></a>set</h4><p><code>set</code> 内部采用红黑树实现。平衡二叉树的特性使得 <code>set</code> 非常适合处理需要同时兼顾查找、插入与删除的情况。</p>
+<ul>
+<li><p><code>insert(x)</code> 当容器中没有等价元素的时候，将元素 x 插入到 <code>set</code> 中。</p>
+</li>
+<li><p><code>erase(x)</code> 删除值为 x 的 <strong>所有</strong> 元素，返回删除元素的个数。</p>
+</li>
+<li><p><code>erase(pos)</code> 删除迭代器为 pos 的元素，要求迭代器必须合法。</p>
+</li>
+<li><p><code>erase(first,last)</code> 删除迭代器在 [first,last)范围内的所有元素。</p>
+</li>
+<li><p><code>clear()</code> 清空 <code>set</code>。</p>
+</li>
+<li><p><code>count(x)</code> 返回 <code>set</code> 内键为 x 的元素数量。</p>
+</li>
+<li><p><code>find(x)</code> 在 <code>set</code> 内存在键为 x 的元素时会返回该元素的迭代器，否则返回 <code>end()</code>。</p>
+</li>
+<li><p><code>lower_bound(x)</code> 返回指向首个<strong>不小于</strong>给定键的元素的迭代器。如果不存在这样的元素，返回 <code>end()</code>。</p>
+</li>
+<li><p><code>upper_bound(x)</code> 返回指向首个<strong>大于</strong>给定键的元素的迭代器。如果不存在这样的元素，返回 <code>end()</code>。</p>
+</li>
+<li><p><code>empty()</code> 返回容器是否为空。</p>
+</li>
+<li><p><code>size()</code> 返回容器内元素个数。</p>
+</li>
+</ul>
+<p>####map</p>
+<p><code>map</code> 重载了 <code>operator[]</code>，可以用任意定义了 <code>operator &lt;</code> 的类型作为下标（在 <code>map</code> 中叫做 <code>key</code>，也就是索引）。</p>
+<ul>
+<li><p>可以直接通过下标访问来进行查询或插入操作。例如 <code>mp[&quot;Alan&quot;]=100</code>。在利用下标访问 <code>map</code> 中的某个元素时，如果 <code>map</code> 中不存在相应键的元素，会自动在 <code>map</code> 中插入一个新元素，并将其值设置为默认值（对于整数，值为零；对于有默认构造函数的类型，会调用默认构造函数进行初始化）</p>
+</li>
+<li><p>通过向 <code>map</code> 中插入一个类型为 <code>pair&lt;Key, T&gt;</code> 的值可以达到插入元素的目的，例如 <code>mp.insert(pair&lt;string,int&gt;(&quot;Alan&quot;,100));</code>；</p>
+</li>
+<li><p><code>erase(key)</code> 函数会删除键为 <code>key</code> 的 <strong>所有</strong> 元素。返回值为删除元素的数量。</p>
+</li>
+<li><p><code>erase(pos)</code>: 删除迭代器为 pos 的元素，要求迭代器必须合法。</p>
+</li>
+<li><p><code>erase(first,last)</code>: 删除迭代器在[first,last)范围内的所有元素。</p>
+</li>
+<li><p><code>clear()</code> 函数会清空整个容器。</p>
+</li>
+<li><p><code>count(x)</code>: 返回容器内键为 x 的元素数量。</p>
+</li>
+<li><p><code>find(x)</code>: 若容器内存在键为 x 的元素，会返回该元素的迭代器；否则返回 <code>end()</code>。</p>
+</li>
+<li><p><code>lower_bound(x)</code>: 返回指向首个<em>不小于</em>给定键的元素的迭代器。</p>
+</li>
+<li><p><code>upper_bound(x)</code>: 返回指向首个<em>大于</em>给定键的元素的迭代器。若容器内所有元素均小于或等于给定键，返回 <code>end()</code>。</p>
+</li>
+<li><p><code>empty()</code>: 返回容器是否为空。</p>
+</li>
+<li><p><code>size()</code>: 返回容器内元素个数。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/06/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cks0imdj40000y0vvd44xd668" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-%E8%AF%AD%E6%B3%95/" rel="tag">C++,语法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/08/06/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">动态规划的优化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">算法基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/">算法进阶</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-%E8%AF%AD%E6%B3%95/" rel="tag">C++,语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/" rel="tag">dp</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-%E8%AF%AD%E6%B3%95/" style="font-size: 10px;">C++,语法</a> <a href="/tags/dp/" style="font-size: 20px;">dp</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/06/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8/">C++ STL使用</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/06/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96/">动态规划的优化</a>
+          </li>
+        
+          <li>
+            <a href="/https:/oi-wiki.org/dp/knapsack/">动态规划初步</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/05/hello-world/">How to post?</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Liuliang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
