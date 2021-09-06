@@ -15,7 +15,7 @@
 <meta property="og:description" content="动态规划的优化策略单调队列&#x2F;单调栈优化单调队列eg.[Poj2823 - 滑动窗口]给予一个长度为n的数组，输出每k个连续元素中的最大值和最小值。 解：使用STL容器deque，维护一个单调的数列。以求最小值为例，操作包括： 序列例：1 3 -1 -3 5 3 6 7。 维护递增的队列，操作如下：    操作 队列状态    1 入队 &amp;#123;1&amp;#125;   3 比 1 大，3 入队 &amp;#">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-08-06T14:40:33.683Z">
-<meta property="article:modified_time" content="2021-08-07T05:51:25.181Z">
+<meta property="article:modified_time" content="2021-08-07T07:47:49.093Z">
 <meta property="article:author" content="Liuliang">
 <meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
@@ -145,16 +145,24 @@
 
 <p>####单调栈</p>
 <p>与单调队列相比，其只在一端进行进出。单调队列主要处理的是一个区间内的最大/小值，而单调栈处理的是寻找以某个值为最小/大值的最大区间。参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/lucky52529/article/details/89155694">lucky52529的博客</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">for (遍历)</span><br><span class="line">&#123;</span><br><span class="line">	if (栈空 || 栈顶元素大于等于当前比较元素)</span><br><span class="line">		入栈;</span><br><span class="line">	else&#123;</span><br><span class="line">		while (栈不为空 &amp;&amp; 栈顶元素小于当前元素)&#123;</span><br><span class="line">			栈顶元素出栈;</span><br><span class="line">			更新结果;</span><br><span class="line">		&#125;</span><br><span class="line">		当前数据入栈;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>其中需要注意的是：</p>
 <p>1.对于某些特殊题目，栈内元素出不完，遗留在栈里面的人还没有考虑，导致答案错误，这时候我们要添加结束标识符强制清空栈。比如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vec.push_back(INF);//对于单调递增栈（栈顶最小），补充结束标识符，使最后清空栈</span><br></pre></td></tr></table></figure>
 
+<p>2.我们进行栈的处理时，是在出栈操作时进行的。</p>
 <p>模板题练习：[<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5788">洛谷P5788</a>]</p>
-<pre><code>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
-</code></pre>
+
+
+
+
 
       
     </div>
@@ -227,7 +235,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li></ul>
     </div>
   </div>
 
@@ -238,6 +246,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/09/06/%E4%BB%8EC%E8%BF%9B%E6%AD%A5%E5%88%B0C++%E2%80%94%E2%80%94%E7%89%B9%E6%80%A7/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2021/08/06/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8/">C++ STL使用</a>

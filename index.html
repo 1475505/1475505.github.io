@@ -64,6 +64,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-从C进步到C++——特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/09/06/%E4%BB%8EC%E8%BF%9B%E6%AD%A5%E5%88%B0C++%E2%80%94%E2%80%94%E7%89%B9%E6%80%A7/" class="article-date">
+  <time datetime="2021-09-06T11:11:52.010Z" itemprop="datePublished">2021-09-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="从C进步到C-——特性"><a href="#从C进步到C-——特性" class="headerlink" title="从C进步到C++——特性"></a>从C进步到C++——特性</h1><p>[TOC]</p>
+<p>###结构体初始化构造</p>
+<p>定义结构体时，加入以下语句，可以方便地进行初始化。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> id;</span><br><span class="line">	<span class="keyword">char</span> gender;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">student</span>()&#123;&#125;  <span class="comment">//系统默认，用于未经初始化定义结构体</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">student</span> (<span class="keyword">int</span> _id, <span class="keyword">char</span> _gender )&#123;</span><br><span class="line">		id = _id;</span><br><span class="line">		gender = _gender;</span><br><span class="line">	&#125;<span class="comment">//用于初始化id和gender。注意：减少参数 可以达到只使用部分元素构造的效果</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="auto声明推断"><a href="#auto声明推断" class="headerlink" title="auto声明推断"></a>auto声明推断</h3><p>使用STL容器时的迭代器声明等等往往比较复杂，此时使用 <code>auto</code> 可简单很多：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line"><span class="keyword">auto</span> pvec = vec.<span class="built_in">begin</span>();<span class="comment">//vector&lt;int&gt;::iterator</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="容器类for-range循环"><a href="#容器类for-range循环" class="headerlink" title="容器类for-range循环"></a>容器类for-range循环</h3><p>对数组或容器执行循环操作客户写成：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> prices[<span class="number">5</span>] = &#123;<span class="number">1.1</span> , <span class="number">2.2</span> , <span class="number">3.3</span> , <span class="number">4.4</span> , <span class="number">5.5</span>&#125;</span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">double</span> x : prices)&#123;<span class="comment">//只读</span></span><br><span class="line">	cout&lt;&lt;x&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">double</span> &amp;x : prices)&#123;<span class="comment">//写需要使用指针</span></span><br><span class="line">	x = x / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>结合上面的auto 部分循环可以写成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for ( auto x : vec )</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考资料：</p>
+<p>《C++ Primer》 目录</p>
+<p>《C++ Primer Plus》  18.1</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/09/06/%E4%BB%8EC%E8%BF%9B%E6%AD%A5%E5%88%B0C++%E2%80%94%E2%80%94%E7%89%B9%E6%80%A7/" data-id="ckt8jqm3r000070vvc3wf46jz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C++STL的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/08/06/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
@@ -327,16 +378,24 @@
 
 <p>####单调栈</p>
 <p>与单调队列相比，其只在一端进行进出。单调队列主要处理的是一个区间内的最大/小值，而单调栈处理的是寻找以某个值为最小/大值的最大区间。参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/lucky52529/article/details/89155694">lucky52529的博客</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">for (遍历)</span><br><span class="line">&#123;</span><br><span class="line">	if (栈空 || 栈顶元素大于等于当前比较元素)</span><br><span class="line">		入栈;</span><br><span class="line">	else&#123;</span><br><span class="line">		while (栈不为空 &amp;&amp; 栈顶元素小于当前元素)&#123;</span><br><span class="line">			栈顶元素出栈;</span><br><span class="line">			更新结果;</span><br><span class="line">		&#125;</span><br><span class="line">		当前数据入栈;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>其中需要注意的是：</p>
 <p>1.对于某些特殊题目，栈内元素出不完，遗留在栈里面的人还没有考虑，导致答案错误，这时候我们要添加结束标识符强制清空栈。比如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vec.push_back(INF);//对于单调递增栈（栈顶最小），补充结束标识符，使最后清空栈</span><br></pre></td></tr></table></figure>
 
+<p>2.我们进行栈的处理时，是在出栈操作时进行的。</p>
 <p>模板题练习：[<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5788">洛谷P5788</a>]</p>
-<pre><code>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
-</code></pre>
+
+
+
+
 
       
     </div>
@@ -498,7 +557,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li></ul>
     </div>
   </div>
 
@@ -509,6 +568,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/09/06/%E4%BB%8EC%E8%BF%9B%E6%AD%A5%E5%88%B0C++%E2%80%94%E2%80%94%E7%89%B9%E6%80%A7/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2021/08/06/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8/">C++ STL使用</a>
