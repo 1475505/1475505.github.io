@@ -83,12 +83,17 @@
 
 
 
+<p>这是一个二叉树的定义示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="keyword">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(<span class="literal">NULL</span>), <span class="built_in">right</span>(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="auto声明推断"><a href="#auto声明推断" class="headerlink" title="auto声明推断"></a>auto声明推断</h3><p>使用STL容器时的迭代器声明等等往往比较复杂，此时使用 <code>auto</code> 可简单很多：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line"><span class="keyword">auto</span> pvec = vec.<span class="built_in">begin</span>();<span class="comment">//vector&lt;int&gt;::iterator</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="容器类for-range循环"><a href="#容器类for-range循环" class="headerlink" title="容器类for-range循环"></a>容器类for-range循环</h3><p>对数组或容器执行循环操作客户写成：</p>
+<h3 id="容器类for-range循环"><a href="#容器类for-range循环" class="headerlink" title="容器类for-range循环"></a>容器类for-range循环</h3><p>对数组或容器执行循环操作可写成：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> prices[<span class="number">5</span>] = &#123;<span class="number">1.1</span> , <span class="number">2.2</span> , <span class="number">3.3</span> , <span class="number">4.4</span> , <span class="number">5.5</span>&#125;</span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">double</span> x : prices)&#123;<span class="comment">//只读</span></span><br><span class="line">	cout&lt;&lt;x&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">double</span> &amp;x : prices)&#123;<span class="comment">//写需要使用指针</span></span><br><span class="line">	x = x / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -98,9 +103,47 @@
 
 
 
+<h3 id="string类的类型转换函数"><a href="#string类的类型转换函数" class="headerlink" title="string类的类型转换函数"></a>string类的类型转换函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">43</span>;</span><br><span class="line">string s = <span class="built_in">to_string</span>(i);</span><br><span class="line"><span class="keyword">double</span> d = <span class="built_in">stod</span>(s);</span><br><span class="line"><span class="comment">//对应的有：stoi , stoll , stof</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="rotate-copy-fill函数"><a href="#rotate-copy-fill函数" class="headerlink" title="rotate/copy/fill函数"></a>rotate/copy/fill函数</h3><p>rotate函数可以“平移”。直接看例子吧：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; a&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line"><span class="built_in">rotate</span>(a.<span class="built_in">begin</span>() , a.<span class="built_in">begin</span>()+<span class="number">2</span> , a.<span class="built_in">end</span>());</span><br><span class="line"><span class="comment">//a:[3,4,5,6,7,8,9,1,2]</span></span><br></pre></td></tr></table></figure>
+
+<p>相当于得到：[mid:end] + [begin:mid]</p>
+<p>copy函数将一个目标（容器、数组）里面的元素复制至另一个目标。</p>
+<p><strong>注：使用前 newvector.resize(7) 这行代码为newvector分配空间，否则程序会崩</strong>。</p>
+<p>此外，通过vector<int>  dp ( 7 , 0 )也可以达到初始化<code>dp</code>为[0,0,0,0,0,0,0].</p>
+<p>fill函数可以为数组和vector赋初始值。头文件：<algorithm></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> v[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">fill</span>(v,v+<span class="number">10</span>,<span class="number">-1</span>);<span class="comment">//相当于 memset(v,-1,sizeof v);</span></span><br><span class="line"><span class="keyword">int</span> s[<span class="number">10</span>][<span class="number">10</span>];</span><br><span class="line"><span class="built_in">fill</span>(s[<span class="number">0</span>],s[<span class="number">0</span>]+<span class="number">10</span>*<span class="number">10</span>,<span class="number">-1</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="sort-lower-bound-upper-bound-unique函数"><a href="#sort-lower-bound-upper-bound-unique函数" class="headerlink" title="sort/lower_bound/upper_bound/unique函数"></a>sort/lower_bound/upper_bound/unique函数</h3><p>sort函数可用于 vector 、 数组 和 deque 的排序。如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span>(b,b+n,greater&lt;<span class="keyword">int</span>&gt;());<span class="comment">//将b降序排列</span></span><br></pre></td></tr></table></figure>
+
+<p>在<strong>已排好升序</strong>的情况下：</p>
+<p>1.可使用lower_bound函数（startptr，endptr ，num）得到第一个不小于num的值的指针。（二分查找）。如下代码返回下标：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];<span class="comment">//......</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="built_in">upper_bound</span>(a , a+<span class="number">10</span> , <span class="number">3</span>) - a;</span><br></pre></td></tr></table></figure>
+
+<p>2.可使用unique函数返回最后一个非重复元素的指针，如下代码进行<strong>去重</strong>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vec.<span class="built_in">erase</span>( <span class="built_in">unique</span>(vec.<span class="built_in">begin</span>(),vec.<span class="built_in">end</span>()) , vec.<span class="built_in">end</span>() );</span><br></pre></td></tr></table></figure>
+
+<p>拓展排序：partial_sort 方法</p>
+<h3 id="数组生成-shuffle-itoa"><a href="#数组生成-shuffle-itoa" class="headerlink" title="数组生成- shuffle/itoa"></a>数组生成- shuffle/itoa</h3><p>随机数组：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">srand</span>(<span class="built_in">time</span>(<span class="literal">NULL</span>));</span><br><span class="line"><span class="built_in">random_shuffle</span>(a+<span class="number">1</span>,a+n+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>递增数组：与 golang 可对比：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">itoa</span>(arr,arr+n,<span class="number">0</span>);<span class="comment">//[0,1,2,3,4,...];</span></span><br></pre></td></tr></table></figure>
+
+
+
 <p>参考资料：</p>
 <p>《C++ Primer》 目录</p>
 <p>《C++ Primer Plus》  18.1</p>
+<p>《算法竞赛入门经典习题解答》第一章</p>
 
       
     </div>
@@ -438,17 +481,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="动态规划初步"><a href="#动态规划初步" class="headerlink" title="动态规划初步"></a>动态规划初步</h2><h3 id="背包dp"><a href="#背包dp" class="headerlink" title="背包dp"></a>背包dp</h3><p>背包问题的基本状态转移方程</p>
+        <h2 id="动态规划初步"><a href="#动态规划初步" class="headerlink" title="动态规划初步"></a>动态规划初步</h2><p>[toc]</p>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>动态规划实际是“聪明地枚举”，会遍历所有可能的情况。对其中的“剪枝”（不丢失最优解）属于贪心的范畴，可能提高了“溯源”的难度。</p>
+<p>首先注意：动态规划不是说一上来就写状态转移方程（直接做“备忘录”），而是逐步分析，如下：</p>
+<p>分析最优子结构 -&gt; 递推公式 -&gt; 自底向上求解（初始化、状态转移）</p>
+<p>分析技巧： 递归树、状态转移图</p>
+<p>调试技巧：打印 dp 数组</p>
+<p>如果需要“溯源”，可以开一个新数组标记。</p>
+<p>由于需要状态转移，一般数组下标从1开始，对应的<code>dp</code>数组也开有“安全空间”。</p>
+<h3 id="背包-dp"><a href="#背包-dp" class="headerlink" title="背包 dp"></a>背包 dp</h3><p>####背包问题的基本状态转移方程</p>
 <p>f[j] 表示处理到当前物品 i 时背包容量为 j 的最大价值，得出以下方程：</p>
 <p><img src="C:\Users\ll\blog\source_posts\贴图\20210806dp1.png" alt="image-20210806174605728"></p>
-<h4 id="0-1背包问题"><a href="#0-1背包问题" class="headerlink" title="0-1背包问题"></a>0-1背包问题</h4><p>注意：关于 j 的循环是逆向的。</p>
+<h4 id="0-1背包问题"><a href="#0-1背包问题" class="headerlink" title="0-1背包问题"></a>0-1背包问题</h4><p>注意：关于 j 的循环是逆向的。<strong>为了保证物品i只被放入一次！</strong>从后往前循环，每次取得状态<strong>不会和之前取得状态重合</strong>（也就是要求子问题之间互相独立），这样每种物品就只取一次了。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= w[i]; j--) &#123;</span><br><span class="line">            dp[j] = <span class="built_in">max</span>(dp[j], dp[j - w[i]] + v[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="0-1背包问题打印方案"><a href="#0-1背包问题打印方案" class="headerlink" title="0-1背包问题打印方案"></a>0-1背包问题打印方案</h4><p>对于滚动数组方法，由于少存储了很多数据，所以很难溯源。</p>
+<p>我们先来看二维情况下，背包问题的循环遍历顺序：</p>
+<p>1.当然，传统地（i++,j++）是可行的。并且可以边读边计算。</p>
+<p>2.<strong>先遍历容量，再遍历物品，也是可以的！</strong>虽然两个for循环遍历的次序不同，但是<code>dp[i][j]</code>所需要的状态来自左上角，不影响<code>dp[i][j]</code>的下标和状态转移。</p>
+<p>3.能否<strong>逆序遍历物品</strong>？需要经过小小地修改。此时，用dp[i,j]表示 把第 i, i＋1, i＋2,…, n 个物品装到容量为j的背包中的最大总重量。也就是说，“对称”了一下：</p>
+<p>由于下标的意义变化，其状态转移方程也要发生改变：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = n; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line"><span class="keyword">for</span>(j = <span class="number">0</span>; j &lt;= C; j++) </span><br><span class="line"><span class="keyword">if</span>(j &gt;= V[i]) </span><br><span class="line">	d[i][j]=<span class="built_in">max</span>(d[i+<span class="number">1</span>][j],d[i＋<span class="number">1</span>][j－V[i]]＋W[i]);<span class="comment">//！</span></span><br><span class="line"><span class="keyword">else</span>  </span><br><span class="line">    d[i][j]= d[i+<span class="number">1</span>][j]；</span><br></pre></td></tr></table></figure>
+
+<p>当然，最后我们的输出的结果也就为最终的 <code>dp[1][C]</code>了。</p>
+<p>我们可以总结一下：循环的遍历顺序和状态转移的方向最好是对应的！这和我们提到过的子问题之间互相独立也是一致的。</p>
+<p>4.能否<strong>逆序遍历容量</strong>？类似于3的思路，但比较难理解，略。</p>
+<p>对于打印方案，可以按照（i++，j++）的方案结合标志数组记录回溯，如果有<strong>字典序最小</strong>的要求，最终需要<code>reverse</code>；另一种想法是上面的第3点，不需要<code>reverse</code>。以下是示例代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dp[MAX_N][MAX_N];</span><br><span class="line"><span class="keyword">int</span> dp_d[MAX_N][MAX_N];</span><br><span class="line"><span class="keyword">int</span> N, V;<span class="comment">//n - 物品数，v - 容量（体积） w - 价值</span></span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">w</span><span class="params">(<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v</span><span class="params">(<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//INPUT</span></span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span> dp);</span><br><span class="line">    <span class="built_in">memset</span>(dp_d, <span class="number">0</span>, <span class="keyword">sizeof</span> dp_d);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//DP</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = N; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= V; j++) &#123;</span><br><span class="line">            <span class="keyword">int</span> noti = dp[i + <span class="number">1</span>][j];</span><br><span class="line">            <span class="keyword">int</span> geti = j &gt;= v[i] ? dp[i + <span class="number">1</span>][j - v[i]] + w[i] : <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//for (int j = v[i]; j &lt;= V; j++)不可！why？遍历不完全！（dp本质）</span></span><br><span class="line">            <span class="keyword">if</span> (noti &gt; geti) &#123;<span class="comment">//不能用&gt;= 不然多解时会出错</span></span><br><span class="line">                dp[i][j] = noti;</span><br><span class="line">                dp_d[i][j] = <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                dp[i][j] = geti;</span><br><span class="line">                dp_d[i][j] = <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//DP_D</span></span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span> ,  j = V;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= N &amp;&amp; j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in"><span class="keyword">switch</span></span> (dp_d[i][j]) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                i++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">if</span> (j &gt;= v[i])<span class="comment">//一个补丁，bug以后补坑</span></span><br><span class="line">                    ans.<span class="built_in">push_back</span>(i);</span><br><span class="line">                j -= v[i];</span><br><span class="line">                i++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : ans) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
 
 <h4 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h4><p>注意：关于 j 的循环是正向的。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">        for (int j = t[i]; j &lt;= T; j++) &#123;</span><br><span class="line">            dp[j] = max(dp[j], dp[j - t[i]] + v[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p>Tips：解题时，注意数据范围，选择合适的数据结构（eg.long long）。</p>
-<p><strong>完全背包和 01 背包的区别就在于对时间大小枚举的顺序不同</strong></p>
+<p>Tips：解题时，注意数据范围，选择合适的数据结构（eg.long long，_int128）。</p>
+<p><strong>完全背包和 01 背包的区别就在于对容量限制枚举的顺序不同</strong></p>
 <p>原因：0-1背包问题的状态转移利用的是“上一个状态”，完全背包利用的是“当前状态”。</p>
 
       
