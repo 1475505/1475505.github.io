@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>梦舞星球</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="回溯法[TOC] 解决一个回溯问题，实际上就是一个决策树的遍历过程，使用 isValid 函数剪枝。回溯算法模板框架如下： 12345678910111213void backtracking(参数) &amp;#123;    if (结束遍历条件) &amp;#123;        存放结果;        return;    &amp;#125;    for (选择：本层集合中元素（树中节点孩子的数量就是集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="梦舞星球">
+<meta property="og:url" content="http://example.com/2021/09/09/%E5%9B%9E%E6%BA%AF%E6%B3%95/index.html">
+<meta property="og:site_name" content="梦舞星球">
+<meta property="og:description" content="回溯法[TOC] 解决一个回溯问题，实际上就是一个决策树的遍历过程，使用 isValid 函数剪枝。回溯算法模板框架如下： 12345678910111213void backtracking(参数) &amp;#123;    if (结束遍历条件) &amp;#123;        存放结果;        return;    &amp;#125;    for (选择：本层集合中元素（树中节点孩子的数量就是集合">
+<meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210130173631174.png">
+<meta property="og:image" content="https://github.com/labuladong/fucking-algorithm/raw/master/pictures/backtracking/3.jpg">
+<meta property="article:published_time" content="2021-09-09T12:13:56.975Z">
+<meta property="article:modified_time" content="2021-09-10T01:00:09.631Z">
+<meta property="article:author" content="Liuliang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210130173631174.png">
+  
+    <link rel="alternate" href="/atom.xml" title="梦舞星球" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">梦舞星球</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-回溯法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/09/09/%E5%9B%9E%E6%BA%AF%E6%B3%95/" class="article-date">
+  <time datetime="2021-09-09T12:13:56.975Z" itemprop="datePublished">2021-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h1><p>[TOC]</p>
+<p>解决一个回溯问题，实际上就是一个决策树的遍历过程，使用 <code>isValid</code> 函数剪枝。回溯算法模板框架如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(参数)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (结束遍历条件) &#123;</span><br><span class="line">        存放结果;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">isValid</span>(..)) 	<span class="keyword">continue</span>;<span class="comment">//// 排除不合法选择</span></span><br><span class="line">        处理节点;</span><br><span class="line">        <span class="built_in">backtracking</span>(路径，选择列表); <span class="comment">// 深入</span></span><br><span class="line">        撤销节点处理；</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于<code>isValid</code>函数及剪枝策略，回溯法求最值时，可以通过贪心思想找到一个“较优解”，减去差于其的枝。(分支限界法)</p>
+<p>回溯与 DFS 的思想很类似，区别主要在于解空间的表示和处理：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 循环内：</span><br><span class="line">record[son] = <span class="number">1</span>; <span class="comment">// 标记使用/状态</span></span><br><span class="line"><span class="built_in">dfs</span>(deep + <span class="number">1</span>); <span class="comment">// dfs 下一层</span></span><br><span class="line">record[son] = <span class="number">0</span>; <span class="comment">// 取消标记/状态</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在递归之前做出选择，在递归之后撤销刚才的选择</strong>。</p>
+<p>解空间的状态表示主要有： 排列树 和 组合树 两种。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210130173631174.png" alt="回溯算法理论基础"></p>
+<p>口诀：for循环，换子树；递归调用往深溯</p>
+<h4 id="示例：生成全排列"><a href="#示例：生成全排列" class="headerlink" title="示例：生成全排列"></a>示例：生成全排列</h4><p><img src="https://github.com/labuladong/fucking-algorithm/raw/master/pictures/backtracking/3.jpg" alt="img"></p>
+<h3 id="n-皇后问题的-位运算解法-及-bitset-包"><a href="#n-皇后问题的-位运算解法-及-bitset-包" class="headerlink" title="n-皇后问题的 位运算解法 及 bitset 包"></a>n-皇后问题的 位运算解法 及 bitset 包</h3><h4 id="bitset"><a href="#bitset" class="headerlink" title="bitset"></a>bitset</h4><p>bitset 头文件中，有一种类似数组的结构，它的每一个元素只能是０或１，每个元素仅用１bit空间，名为 bitset 。构造方式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bitset&lt;4&gt; bitset1;　　<span class="comment">//无初始化下，默认每一位均为0</span></span><br><span class="line"><span class="function">bitset&lt;8&gt; <span class="title">bitset2</span><span class="params">(<span class="number">16</span>)</span></span>;　<span class="comment">//保存长度为8的16的二进制表示：[00010000]</span></span><br><span class="line">string s = <span class="string">&quot;10010&quot;</span>;</span><br><span class="line"><span class="function">bitset&lt;8&gt; <span class="title">bitset3</span><span class="params">(s)</span></span>;　　<span class="comment">//长度为10，前补0。[00010010]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>bitset 支持一些按位的位运算，且支持to_string类型转换。</p>
+<p>对于一个叫做bit的bitset：<br>bit.size()       返回大小（位数）<br>bit.count()     返回1的个数<br>bit.any()       返回是否有1<br>bit.none()      返回是否没有1<br>bit.set()       全都变成1<br>bit.set(p)      将第p + 1位变成1（bitset是从第0位开始的！）<br>bit.set(p, x)   将第p + 1位变成x<br>bit.reset()     全都变成0<br>bit.reset(p)    将第p + 1位变成0<br>bit.flip()      全都取反<br>bit.flip(p)     将第p + 1位取反<br>bit.to_ulong()  返回它转换为unsigned long的结果，如果超出范围则报错<br>bit.to_ullong() 返回它转换为unsigned long long的结果，如果超出范围则报错</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/09/09/%E5%9B%9E%E6%BA%AF%E6%B3%95/" data-id="cktfgyw7p0000wsvvgdk1d1ol" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/09/06/%E4%BB%8EC%E8%BF%9B%E6%AD%A5%E5%88%B0C++%E2%80%94%E2%80%94%E7%89%B9%E6%80%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">算法基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/">算法进阶</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-%E8%AF%AD%E6%B3%95/" rel="tag">C++,语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/" rel="tag">dp</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-%E8%AF%AD%E6%B3%95/" style="font-size: 10px;">C++,语法</a> <a href="/tags/dp/" style="font-size: 20px;">dp</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/09/09/%E5%9B%9E%E6%BA%AF%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/06/%E4%BB%8EC%E8%BF%9B%E6%AD%A5%E5%88%B0C++%E2%80%94%E2%80%94%E7%89%B9%E6%80%A7/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/06/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8/">C++ STL使用手册</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/06/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96/">动态规划的优化</a>
+          </li>
+        
+          <li>
+            <a href="/https:/oi-wiki.org/dp/knapsack/">动态规划初步</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Liuliang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
