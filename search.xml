@@ -1,30 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>How to post?</title>
-    <url>/2021/08/05/hello-world/</url>
-    <content><![CDATA[<p>hexo clean</p>
-<p>hexo generate</p>
-<p>hexo deploy -g</p>
-<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>C++ STL使用手册</title>
-    <url>/2021/08/06/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="C-STL的使用手册"><a href="#C-STL的使用手册" class="headerlink" title="C++ STL的使用手册"></a>C++ STL的使用手册</h2><p>[toc]</p>
+    <url>//post/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8.html</url>
+    <content><![CDATA[<p>#C++ STL的使用手册</p>
+<p>[toc]</p>
 <p><img src="https://oi-wiki.org/lang/csl/images/container1.png" alt="img"></p>
 <h3 id="共有函数"><a href="#共有函数" class="headerlink" title="共有函数"></a>共有函数</h3><p><code>=</code>：有赋值运算符以及复制构造函数。</p>
 <p><code>begin()</code>：返回指向开头元素的迭代器。</p>
@@ -195,7 +175,9 @@
 <li><p><code>substr(pos,len)</code>方法可帮助你截取子串。</p>
 </li>
 <li><p>上面的共有函数（<code>erase</code> <code>find</code>等）也是支持的。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">string s1 = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">string s2 = <span class="string">&quot;world&quot;</span>;</span><br><span class="line">s1.<span class="built_in">insert</span>(<span class="number">3</span>,s2);<span class="comment">//Helworldlo</span></span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">string s1 <span class="token operator">=</span> <span class="token string">"Hello"</span><span class="token punctuation">;</span>
+string s2 <span class="token operator">=</span> <span class="token string">"world"</span><span class="token punctuation">;</span>
+s1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Helworldlo</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <h3 id="STL算法"><a href="#STL算法" class="headerlink" title="STL算法"></a>STL算法</h3><p>在《特性》篇也介绍有一些用法。</p>
 <ul>
@@ -210,7 +192,10 @@
 <li><code>bitset(int val)</code>: 设为 <code>val</code> 的二进制形式。</li>
 <li><code>bitset(const string&amp; str)</code>: 设为 01 串 <code>str</code>。</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">bitset&lt;4&gt; bitset1;　　<span class="comment">//无初始化下，默认每一位均为0</span></span><br><span class="line"><span class="function">bitset&lt;8&gt; <span class="title">bitset2</span><span class="params">(<span class="number">16</span>)</span></span>;　<span class="comment">//保存长度为8的16的二进制表示：[00010000]</span></span><br><span class="line">string s = <span class="string">&quot;10010&quot;</span>;</span><br><span class="line"><span class="function">bitset&lt;8&gt; <span class="title">bitset3</span><span class="params">(s)</span></span>;　　<span class="comment">//长度为10，前补0。[00010010]</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">bitset<span class="token operator">&lt;</span><span class="token number">4</span><span class="token operator">></span> bitset1<span class="token punctuation">;</span>　　<span class="token comment">//无初始化下，默认每一位均为0</span>
+bitset<span class="token operator">&lt;</span><span class="token number">8</span><span class="token operator">></span> <span class="token function">bitset2</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>　<span class="token comment">//保存长度为8的16的二进制表示：[00010000]</span>
+string s <span class="token operator">=</span> <span class="token string">"10010"</span><span class="token punctuation">;</span>
+bitset<span class="token operator">&lt;</span><span class="token number">8</span><span class="token operator">></span> <span class="token function">bitset3</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>　　<span class="token comment">//长度为10，前补0。[00010010]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><p><code>operator []</code>: 访问其特定的一位。</p>
@@ -273,8 +258,144 @@
       </tags>
   </entry>
   <entry>
+    <title>How to post?</title>
+    <url>//post/hello-world.html</url>
+    <content><![CDATA[<p>hexo clean</p>
+<p>hexo generate</p>
+<p>hexo deploy -g</p>
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>C++ 特性</title>
+    <url>//post/%E4%BB%8EC%E8%BF%9B%E6%AD%A5%E5%88%B0C++%E2%80%94%E2%80%94%E7%89%B9%E6%80%A7.html</url>
+    <content><![CDATA[<h1 id="从C进步到C-——特性"><a href="#从C进步到C-——特性" class="headerlink" title="从C进步到C++——特性"></a>从C进步到C++——特性</h1><p>[TOC]</p>
+<p>###结构体初始化构造</p>
+<p>定义结构体时，加入以下语句，可以方便地进行初始化。</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">struct student&#123;
+	int id;
+	char gender;
+	
+	student()&#123;&#125;  &#x2F;&#x2F;系统默认，用于未经初始化定义结构体
+	
+	student (int _id, char _gender )&#123;
+		id &#x3D; _id;
+		gender &#x3D; _gender;
+	&#125;&#x2F;&#x2F;用于初始化id和gender。注意：减少参数 可以达到只使用部分元素构造的效果
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>构造函数可以简化为一行，如：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">Point</span> <span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token operator">=</span><span class="token number">0</span> <span class="token punctuation">,</span> <span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">:</span><span class="token function">x</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">y</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p>这是一个二叉树的定义示例：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">struct TreeNode &#123;
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="auto声明推断"><a href="#auto声明推断" class="headerlink" title="auto声明推断"></a>auto声明推断</h3><p>使用STL容器时的迭代器声明等等往往比较复杂，此时使用 <code>auto</code> 可简单很多：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">vector&lt;int&gt; vec;
+auto pvec &#x3D; vec.begin();&#x2F;&#x2F;vector&lt;int&gt;::iterator<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="容器类for-range循环"><a href="#容器类for-range循环" class="headerlink" title="容器类for-range循环"></a>容器类for-range循环</h3><p>对数组或容器执行循环操作可写成：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">double prices[5] &#x3D; &#123;1.1 , 2.2 , 3.3 , 4.4 , 5.5&#125;
+for ( double x : prices)&#123;&#x2F;&#x2F;只读
+	cout&lt;&lt;x&lt;&lt;endl;
+&#125;
+for ( double &amp;x : prices)&#123;&#x2F;&#x2F;写需要使用指针
+	x &#x3D; x &#x2F; 2;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>结合上面的auto 部分循环可以写成：</p>
+<pre class="line-numbers language-none"><code class="language-none">for ( auto x : vec )<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h3 id="string类的类型转换函数"><a href="#string类的类型转换函数" class="headerlink" title="string类的类型转换函数"></a>string类的类型转换函数</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">43</span><span class="token punctuation">;</span>
+string s <span class="token operator">=</span> <span class="token function">to_string</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token function">stod</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//43.000000</span>
+<span class="token comment">//对应的有：stoi , stoll , stof</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="rotate-copy-fill函数"><a href="#rotate-copy-fill函数" class="headerlink" title="rotate/copy/fill函数"></a>rotate/copy/fill函数</h3><p>rotate函数可以“平移”。直接看例子吧：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> a<span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token function">rotate</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">,</span> a<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">2</span> <span class="token punctuation">,</span> a<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//a:[3,4,5,6,7,8,9,1,2]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>相当于得到：[mid:end] + [begin:mid]</p>
+<p>copy函数将一个目标（容器、数组）里面的元素复制至另一个目标。</p>
+<p><strong>注：使用前 <code>newvector.resize(7) </code>这行代码为<code>newvector</code>分配空间，否则程序会崩</strong>。</p>
+<p>此外，通过<code>vector&lt;int&gt;  dp ( 7 , 0 )</code>也可以达到初始化<code>dp</code>为[0,0,0,0,0,0,0].</p>
+<p>fill函数可以为数组和vector赋初始值。头文件：<code>&lt;algorithm&gt;</code></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int v[10];
+fill(v,v+10,-1);&#x2F;&#x2F;相当于 memset(v,-1,sizeof v);
+int s[10][10];
+fill(s[0],s[0]+10*10,-1);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="sort-lower-bound-upper-bound-unique函数"><a href="#sort-lower-bound-upper-bound-unique函数" class="headerlink" title="sort/lower_bound/upper_bound/unique函数"></a>sort/lower_bound/upper_bound/unique函数</h3><p>sort函数可用于 <code>vector </code>、 数组 和 <code>deque</code> 的排序。如：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">sort</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span>b<span class="token operator">+</span>n<span class="token punctuation">,</span><span class="token generic-function"><span class="token function">greater</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//将b降序排列</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在<strong>已排好升序</strong>的情况下：</p>
+<p>1.可使用lower_bound函数（<code>startptr</code>，<code>endptr</code> ，<code>num</code>）得到第一个不小于<code>num</code>的值的指针。（二分查找）。如下代码返回下标：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//......</span>
+<span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token function">upper_bound</span><span class="token punctuation">(</span>a <span class="token punctuation">,</span> a<span class="token operator">+</span><span class="token number">10</span> <span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">-</span> a<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>2.可使用unique函数返回最后一个非重复元素的指针，如下代码进行<strong>去重</strong>。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span> <span class="token function">unique</span><span class="token punctuation">(</span>vec<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>vec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">,</span> vec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>拓展排序：partial_sort 方法</p>
+<h3 id="前缀和-partiai-sort"><a href="#前缀和-partiai-sort" class="headerlink" title="前缀和 partiai_sort"></a>前缀和 <code>partiai_sort</code></h3><p><img src="C:\Users\ll\AppData\Roaming\Typora\typora-user-images\image-20210910213528487.png" alt="image-20210910213528487"></p>
+<h3 id="数组生成-shuffle-iota"><a href="#数组生成-shuffle-iota" class="headerlink" title="数组生成- shuffle/iota"></a>数组生成- shuffle/iota</h3><p>随机打乱数组：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">srand</span><span class="token punctuation">(</span><span class="token function">time</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">random_shuffle</span><span class="token punctuation">(</span>a<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>a<span class="token operator">+</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><code>random_shuffle</code> 自 C++14 起被弃用，C++17 起被移除。可以使用 <code>shuffle</code> 函数代替：</p>
+<p><code>shuffle(v.begin(),v.end(),rand)</code>（最后一个参数传入的是使用的随机数生成器，一般情况下传入 <code>rand</code> 即可）。</p>
+<p>递增数组：与 <code>golang </code>可对比：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">iota</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span>arr<span class="token operator">+</span>n<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//[0,1,2,3,4,...];</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p>参考资料：</p>
+<p>《C++ Primer》 目录</p>
+<p>《C++ Primer Plus》  18.1</p>
+<p>《算法竞赛入门经典习题解答》第一章</p>
+]]></content>
+      <categories>
+        <category>语言基础</category>
+      </categories>
+      <tags>
+        <tag>C++,语法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>动态规划的优化</title>
-    <url>/2021/08/06/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96/</url>
+    <url>//post/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96.html</url>
     <content><![CDATA[<h2 id="动态规划的优化策略"><a href="#动态规划的优化策略" class="headerlink" title="动态规划的优化策略"></a>动态规划的优化策略</h2><h3 id="单调队列-单调栈优化"><a href="#单调队列-单调栈优化" class="headerlink" title="单调队列/单调栈优化"></a>单调队列/单调栈优化</h3><h4 id="单调队列"><a href="#单调队列" class="headerlink" title="单调队列"></a>单调队列</h4><p>eg.[<a href="http://poj.org/problem?id=2823">Poj2823 - 滑动窗口</a>]给予一个长度为n的数组，输出每k个连续元素中的最大值和最小值。</p>
 <p>解：使用STL容器deque，维护一个单调的数列。以求最小值为例，操作包括：</p>
 <p>序列例：1 3 -1 -3 5 3 6 7。</p>
@@ -323,21 +444,44 @@
 <p>1.当满足“若待入列数比先进列的数还要小”，可将其前面的数尽数 “弹出”，再将该数 push 进队尾。因此，前面的数先出列，不可能是最大值。</p>
 <p>2.需要 site 数组记录第 i 个队中的数在原数组中的位置，以弹出越界的队头。</p>
 <p>3.输出时只需输出队头即可。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= n - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!que.<span class="built_in">empty</span>() &amp;&amp; que.<span class="built_in">front</span>().second &lt;= i - n) &#123;</span><br><span class="line">            que.<span class="built_in">pop_front</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!que.<span class="built_in">empty</span>() &amp;&amp; a[i] &lt; que.<span class="built_in">back</span>().first) &#123;</span><br><span class="line">        que.<span class="built_in">pop_back</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    que.<span class="built_in">push_back</span>(<span class="built_in">P</span>(a[i], i));</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= n - <span class="number">1</span>)</span><br><span class="line">        cout &lt;&lt; que.<span class="built_in">front</span>().first &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">for (int i &#x3D; 0; i &lt; m; i++) &#123;
+    if (i &gt;&#x3D; n - 1) &#123;
+        while (!que.empty() &amp;&amp; que.front().second &lt;&#x3D; i - n) &#123;
+            que.pop_front();
+        &#125;
+    &#125;
+    while (!que.empty() &amp;&amp; a[i] &lt; que.back().first) &#123;
+        que.pop_back();
+    &#125;
+    que.push_back(P(a[i], i));
+    if (i &gt;&#x3D; n - 1)
+        cout &lt;&lt; que.front().first &lt;&lt; &quot; &quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>####单调栈</p>
 <p>与单调队列相比，其只在一端进行进出。单调队列主要处理的是一个区间内的最大/小值，而单调栈处理的是寻找以某个值为最小/大值的最大区间。参考<a href="https://blog.csdn.net/lucky52529/article/details/89155694">lucky52529的博客</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for (遍历)</span><br><span class="line">&#123;</span><br><span class="line">	if (栈空 || 栈顶元素大于等于当前比较元素)</span><br><span class="line">		入栈;</span><br><span class="line">	else&#123;</span><br><span class="line">		while (栈不为空 &amp;&amp; 栈顶元素小于当前元素)&#123;</span><br><span class="line">			栈顶元素出栈;</span><br><span class="line">			更新结果;</span><br><span class="line">		&#125;</span><br><span class="line">		当前数据入栈;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">for (遍历)
+&#123;
+	if (栈空 || 栈顶元素大于等于当前比较元素)
+		入栈;
+	else&#123;
+		while (栈不为空 &amp;&amp; 栈顶元素小于当前元素)&#123;
+			栈顶元素出栈;
+			更新结果;
+		&#125;
+		当前数据入栈;
+	&#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
 <p>其中需要注意的是：</p>
 <p>1.对于某些特殊题目，栈内元素出不完，遗留在栈里面的人还没有考虑，导致答案错误，这时候我们要添加结束标识符强制清空栈。比如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vec.push_back(INF);//对于单调递增栈（栈顶最小），补充结束标识符，使最后清空栈</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">vec.push_back(INF);&#x2F;&#x2F;对于单调递增栈（栈顶最小），补充结束标识符，使最后清空栈<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>2.我们进行栈的处理时，是在出栈操作时进行的。</p>
 <p>模板题练习：[<a href="https://www.luogu.com.cn/problem/P5788">洛谷P5788</a>]</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
@@ -354,92 +498,30 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2021/09/06/%E4%BB%8EC%E8%BF%9B%E6%AD%A5%E5%88%B0C++%E2%80%94%E2%80%94%E7%89%B9%E6%80%A7/</url>
-    <content><![CDATA[<h1 id="从C进步到C-——特性"><a href="#从C进步到C-——特性" class="headerlink" title="从C进步到C++——特性"></a>从C进步到C++——特性</h1><p>[TOC]</p>
-<p>###结构体初始化构造</p>
-<p>定义结构体时，加入以下语句，可以方便地进行初始化。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> id;</span><br><span class="line">	<span class="keyword">char</span> gender;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">student</span>()&#123;&#125;  <span class="comment">//系统默认，用于未经初始化定义结构体</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">student</span> (<span class="keyword">int</span> _id, <span class="keyword">char</span> _gender )&#123;</span><br><span class="line">		id = _id;</span><br><span class="line">		gender = _gender;</span><br><span class="line">	&#125;<span class="comment">//用于初始化id和gender。注意：减少参数 可以达到只使用部分元素构造的效果</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>构造函数可以简化为一行，如：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Point</span> (<span class="keyword">int</span> x=<span class="number">0</span> , <span class="keyword">int</span> y = <span class="number">0</span>):<span class="built_in">x</span>(x),<span class="built_in">y</span>(y) &#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>这是一个二叉树的定义示例：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="keyword">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(<span class="literal">NULL</span>), <span class="built_in">right</span>(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="auto声明推断"><a href="#auto声明推断" class="headerlink" title="auto声明推断"></a>auto声明推断</h3><p>使用STL容器时的迭代器声明等等往往比较复杂，此时使用 <code>auto</code> 可简单很多：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line"><span class="keyword">auto</span> pvec = vec.<span class="built_in">begin</span>();<span class="comment">//vector&lt;int&gt;::iterator</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="容器类for-range循环"><a href="#容器类for-range循环" class="headerlink" title="容器类for-range循环"></a>容器类for-range循环</h3><p>对数组或容器执行循环操作可写成：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> prices[<span class="number">5</span>] = &#123;<span class="number">1.1</span> , <span class="number">2.2</span> , <span class="number">3.3</span> , <span class="number">4.4</span> , <span class="number">5.5</span>&#125;</span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">double</span> x : prices)&#123;<span class="comment">//只读</span></span><br><span class="line">	cout&lt;&lt;x&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">double</span> &amp;x : prices)&#123;<span class="comment">//写需要使用指针</span></span><br><span class="line">	x = x / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>结合上面的auto 部分循环可以写成：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for ( auto x : vec )</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="string类的类型转换函数"><a href="#string类的类型转换函数" class="headerlink" title="string类的类型转换函数"></a>string类的类型转换函数</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">43</span>;</span><br><span class="line">string s = <span class="built_in">to_string</span>(i);</span><br><span class="line"><span class="keyword">double</span> d = <span class="built_in">stod</span>(s);<span class="comment">//43.000000</span></span><br><span class="line"><span class="comment">//对应的有：stoi , stoll , stof</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="rotate-copy-fill函数"><a href="#rotate-copy-fill函数" class="headerlink" title="rotate/copy/fill函数"></a>rotate/copy/fill函数</h3><p>rotate函数可以“平移”。直接看例子吧：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; a&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line"><span class="built_in">rotate</span>(a.<span class="built_in">begin</span>() , a.<span class="built_in">begin</span>()+<span class="number">2</span> , a.<span class="built_in">end</span>());</span><br><span class="line"><span class="comment">//a:[3,4,5,6,7,8,9,1,2]</span></span><br></pre></td></tr></table></figure>
-
-<p>相当于得到：[mid:end] + [begin:mid]</p>
-<p>copy函数将一个目标（容器、数组）里面的元素复制至另一个目标。</p>
-<p><strong>注：使用前 <code>newvector.resize(7) </code>这行代码为<code>newvector</code>分配空间，否则程序会崩</strong>。</p>
-<p>此外，通过<code>vector&lt;int&gt;  dp ( 7 , 0 )</code>也可以达到初始化<code>dp</code>为[0,0,0,0,0,0,0].</p>
-<p>fill函数可以为数组和vector赋初始值。头文件：<code>&lt;algorithm&gt;</code></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> v[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">fill</span>(v,v+<span class="number">10</span>,<span class="number">-1</span>);<span class="comment">//相当于 memset(v,-1,sizeof v);</span></span><br><span class="line"><span class="keyword">int</span> s[<span class="number">10</span>][<span class="number">10</span>];</span><br><span class="line"><span class="built_in">fill</span>(s[<span class="number">0</span>],s[<span class="number">0</span>]+<span class="number">10</span>*<span class="number">10</span>,<span class="number">-1</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="sort-lower-bound-upper-bound-unique函数"><a href="#sort-lower-bound-upper-bound-unique函数" class="headerlink" title="sort/lower_bound/upper_bound/unique函数"></a>sort/lower_bound/upper_bound/unique函数</h3><p>sort函数可用于 <code>vector </code>、 数组 和 <code>deque</code> 的排序。如：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sort</span>(b,b+n,greater&lt;<span class="keyword">int</span>&gt;());<span class="comment">//将b降序排列</span></span><br></pre></td></tr></table></figure>
-
-<p>在<strong>已排好升序</strong>的情况下：</p>
-<p>1.可使用lower_bound函数（<code>startptr</code>，<code>endptr</code> ，<code>num</code>）得到第一个不小于<code>num</code>的值的指针。（二分查找）。如下代码返回下标：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];<span class="comment">//......</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="built_in">upper_bound</span>(a , a+<span class="number">10</span> , <span class="number">3</span>) - a;</span><br></pre></td></tr></table></figure>
-
-<p>2.可使用unique函数返回最后一个非重复元素的指针，如下代码进行<strong>去重</strong>。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">vec.<span class="built_in">erase</span>( <span class="built_in">unique</span>(vec.<span class="built_in">begin</span>(),vec.<span class="built_in">end</span>()) , vec.<span class="built_in">end</span>() );</span><br></pre></td></tr></table></figure>
-
-<p>拓展排序：partial_sort 方法</p>
-<h3 id="前缀和-partiai-sort"><a href="#前缀和-partiai-sort" class="headerlink" title="前缀和 partiai_sort"></a>前缀和 <code>partiai_sort</code></h3><p><img src="C:\Users\ll\AppData\Roaming\Typora\typora-user-images\image-20210910213528487.png" alt="image-20210910213528487"></p>
-<h3 id="数组生成-shuffle-iota"><a href="#数组生成-shuffle-iota" class="headerlink" title="数组生成- shuffle/iota"></a>数组生成- shuffle/iota</h3><p>随机打乱数组：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">srand</span>(<span class="built_in">time</span>(<span class="literal">NULL</span>));</span><br><span class="line"><span class="built_in">random_shuffle</span>(a+<span class="number">1</span>,a+n+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<p><code>random_shuffle</code> 自 C++14 起被弃用，C++17 起被移除。可以使用 <code>shuffle</code> 函数代替：</p>
-<p><code>shuffle(v.begin(),v.end(),rand)</code>（最后一个参数传入的是使用的随机数生成器，一般情况下传入 <code>rand</code> 即可）。</p>
-<p>递增数组：与 <code>golang </code>可对比：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">iota</span>(arr,arr+n,<span class="number">0</span>);<span class="comment">//[0,1,2,3,4,...];</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考资料：</p>
-<p>《C++ Primer》 目录</p>
-<p>《C++ Primer Plus》  18.1</p>
-<p>《算法竞赛入门经典习题解答》第一章</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/09/09/%E5%9B%9E%E6%BA%AF%E6%B3%95/</url>
+    <title>算法模板</title>
+    <url>//post/%E5%9B%9E%E6%BA%AF%E6%B3%95.html</url>
     <content><![CDATA[<h1 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h1><p>[TOC]</p>
 <p>解决一个回溯问题，实际上就是一个决策树的遍历过程，使用 <code>isValid</code> 函数剪枝。回溯算法模板框架如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(参数)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (结束遍历条件) &#123;</span><br><span class="line">        存放结果;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">isValid</span>(..)) 	<span class="keyword">continue</span>;<span class="comment">//// 排除不合法选择</span></span><br><span class="line">        处理节点;</span><br><span class="line">        <span class="built_in">backtracking</span>(路径，选择列表); <span class="comment">// 深入</span></span><br><span class="line">        撤销节点处理；</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">backtracking</span><span class="token punctuation">(</span>参数<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>结束遍历条件<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        存放结果<span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>选择：本层集合中元素（树中节点孩子的数量就是集合的大小）<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isValid</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 	<span class="token keyword">continue</span><span class="token punctuation">;</span><span class="token comment">//// 排除不合法选择</span>
+        处理节点<span class="token punctuation">;</span>
+        <span class="token function">backtracking</span><span class="token punctuation">(</span>路径，选择列表<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 深入</span>
+        撤销节点处理；
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>对于<code>isValid</code>函数及剪枝策略，回溯法求最值时，可以通过贪心思想找到一个“较优解”，减去差于其的枝。(分支限界法)</p>
 <p>回溯与 DFS 的思想很类似，区别主要在于解空间的表示和处理：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> 循环内：</span><br><span class="line">record[son] = <span class="number">1</span>; <span class="comment">// 标记使用/状态</span></span><br><span class="line"><span class="built_in">dfs</span>(deep + <span class="number">1</span>); <span class="comment">// dfs 下一层</span></span><br><span class="line">record[son] = <span class="number">0</span>; <span class="comment">// 取消标记/状态</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> 循环内：
+record<span class="token punctuation">[</span>son<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// 标记使用/状态</span>
+<span class="token function">dfs</span><span class="token punctuation">(</span>deep <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// dfs 下一层</span>
+record<span class="token punctuation">[</span>son<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 取消标记/状态</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>在递归之前做出选择，在递归之后撤销刚才的选择</strong>。</p>
 <p>解空间的状态表示主要有： 排列树 和 组合树 两种。</p>
@@ -447,7 +529,10 @@
 <p>口诀：for循环，换子树；递归调用往深溯</p>
 <h4 id="示例：生成全排列"><a href="#示例：生成全排列" class="headerlink" title="示例：生成全排列"></a>示例：生成全排列</h4><p><img src="https://github.com/labuladong/fucking-algorithm/raw/master/pictures/backtracking/3.jpg" alt="img"></p>
 <h3 id="n-皇后问题的-位运算解法-及-bitset-包"><a href="#n-皇后问题的-位运算解法-及-bitset-包" class="headerlink" title="n-皇后问题的 位运算解法 及 bitset 包"></a>n-皇后问题的 位运算解法 及 bitset 包</h3><h4 id="bitset"><a href="#bitset" class="headerlink" title="bitset"></a>bitset</h4><p>bitset 头文件中，有一种类似数组的结构，它的每一个元素只能是０或１，每个元素仅用１bit空间，名为 bitset 。构造方式：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">bitset&lt;4&gt; bitset1;　　<span class="comment">//无初始化下，默认每一位均为0</span></span><br><span class="line"><span class="function">bitset&lt;8&gt; <span class="title">bitset2</span><span class="params">(<span class="number">16</span>)</span></span>;　<span class="comment">//保存长度为8的16的二进制表示：[00010000]</span></span><br><span class="line">string s = <span class="string">&quot;10010&quot;</span>;</span><br><span class="line"><span class="function">bitset&lt;8&gt; <span class="title">bitset3</span><span class="params">(s)</span></span>;　　<span class="comment">//长度为10，前补0。[00010010]</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">bitset<span class="token operator">&lt;</span><span class="token number">4</span><span class="token operator">></span> bitset1<span class="token punctuation">;</span>　　<span class="token comment">//无初始化下，默认每一位均为0</span>
+bitset<span class="token operator">&lt;</span><span class="token number">8</span><span class="token operator">></span> <span class="token function">bitset2</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>　<span class="token comment">//保存长度为8的16的二进制表示：[00010000]</span>
+string s <span class="token operator">=</span> <span class="token string">"10010"</span><span class="token punctuation">;</span>
+bitset<span class="token operator">&lt;</span><span class="token number">8</span><span class="token operator">></span> <span class="token function">bitset3</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>　　<span class="token comment">//长度为10，前补0。[00010010]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -470,7 +555,11 @@
 <p>f[j] 表示处理到当前物品 i 时背包容量为 j 的最大价值，得出以下方程：</p>
 <p><img src="C:\Users\ll\blog\source_posts\贴图\20210806dp1.png" alt="image-20210806174605728"></p>
 <h4 id="0-1背包问题"><a href="#0-1背包问题" class="headerlink" title="0-1背包问题"></a>0-1背包问题</h4><p>注意：关于 j 的循环是逆向的。<strong>为了保证物品i只被放入一次！</strong>从后往前循环，每次取得状态<strong>不会和之前取得状态重合</strong>（也就是要求子问题之间互相独立），这样每种物品就只取一次了。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= w[i]; j--) &#123;</span><br><span class="line">            dp[j] = <span class="built_in">max</span>(dp[j], dp[j - w[i]] + v[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">for (int i &#x3D; 0; i &lt; n; i++) &#123;
+        for (int j &#x3D; m; j &gt;&#x3D; w[i]; j--) &#123;
+            dp[j] &#x3D; max(dp[j], dp[j - w[i]] + v[i]);
+        &#125;
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="0-1背包问题打印方案"><a href="#0-1背包问题打印方案" class="headerlink" title="0-1背包问题打印方案"></a>0-1背包问题打印方案</h4><p>对于滚动数组方法，由于少存储了很多数据，所以很难溯源。</p>
 <p>我们先来看二维情况下，背包问题的循环遍历顺序：</p>
@@ -478,18 +567,73 @@
 <p>2.<strong>先遍历容量，再遍历物品，也是可以的！</strong>虽然两个for循环遍历的次序不同，但是<code>dp[i][j]</code>所需要的状态来自左上角，不影响<code>dp[i][j]</code>的下标和状态转移。</p>
 <p>3.能否<strong>逆序遍历物品</strong>？需要经过小小地修改。此时，用dp[i,j]表示 把第 i, i＋1, i＋2,…, n 个物品装到容量为j的背包中的最大总重量。也就是说，“对称”了一下：</p>
 <p>由于下标的意义变化，其状态转移方程也要发生改变：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = n; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line"><span class="keyword">for</span>(j = <span class="number">0</span>; j &lt;= C; j++) </span><br><span class="line"><span class="keyword">if</span>(j &gt;= V[i]) </span><br><span class="line">	d[i][j]=<span class="built_in">max</span>(d[i+<span class="number">1</span>][j],d[i＋<span class="number">1</span>][j－V[i]]＋W[i]);<span class="comment">//！</span></span><br><span class="line"><span class="keyword">else</span>  </span><br><span class="line">    d[i][j]= d[i+<span class="number">1</span>][j]；</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> n<span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> C<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> 
+<span class="token keyword">if</span><span class="token punctuation">(</span>j <span class="token operator">>=</span> V<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> 
+	d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span><span class="token function">max</span><span class="token punctuation">(</span>d<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>d<span class="token punctuation">[</span>i＋<span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j－V<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span>＋W<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//！</span>
+<span class="token keyword">else</span>  
+    d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span> d<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span>；<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>当然，最后我们的输出的结果也就为最终的 <code>dp[1][C]</code>了。</p>
 <p>我们可以总结一下：循环的遍历顺序和状态转移的方向最好是对应的！这和我们提到过的子问题之间互相独立也是一致的。</p>
 <p>4.能否<strong>逆序遍历容量</strong>？类似于3的思路，但比较难理解，略。</p>
 <p>对于打印方案，可以按照（i++，j++）的方案结合标志数组记录回溯，如果有<strong>字典序最小</strong>的要求，最终需要<code>reverse</code>；另一种想法是上面的第3点，不需要<code>reverse</code>。以下是示例代码：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> dp[MAX_N][MAX_N];</span><br><span class="line"><span class="keyword">int</span> dp_d[MAX_N][MAX_N];</span><br><span class="line"><span class="keyword">int</span> N, V;<span class="comment">//n - 物品数，v - 容量（体积） w - 价值</span></span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">w</span><span class="params">(<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v</span><span class="params">(<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//INPUT</span></span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span> dp);</span><br><span class="line">    <span class="built_in">memset</span>(dp_d, <span class="number">0</span>, <span class="keyword">sizeof</span> dp_d);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//DP</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = N; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= V; j++) &#123;</span><br><span class="line">            <span class="keyword">int</span> noti = dp[i + <span class="number">1</span>][j];</span><br><span class="line">            <span class="keyword">int</span> geti = j &gt;= v[i] ? dp[i + <span class="number">1</span>][j - v[i]] + w[i] : <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//for (int j = v[i]; j &lt;= V; j++)不可！why？遍历不完全！（dp本质）</span></span><br><span class="line">            <span class="keyword">if</span> (noti &gt; geti) &#123;<span class="comment">//不能用&gt;= 不然多解时会出错</span></span><br><span class="line">                dp[i][j] = noti;</span><br><span class="line">                dp_d[i][j] = <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                dp[i][j] = geti;</span><br><span class="line">                dp_d[i][j] = <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//DP_D</span></span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span> ,  j = V;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= N &amp;&amp; j &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in"><span class="keyword">switch</span></span> (dp_d[i][j]) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                i++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">if</span> (j &gt;= v[i])<span class="comment">//一个补丁，bug以后补坑</span></span><br><span class="line">                    ans.<span class="built_in">push_back</span>(i);</span><br><span class="line">                j -= v[i];</span><br><span class="line">                i++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : ans) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> dp<span class="token punctuation">[</span>MAX_N<span class="token punctuation">]</span><span class="token punctuation">[</span>MAX_N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> dp_d<span class="token punctuation">[</span>MAX_N<span class="token punctuation">]</span><span class="token punctuation">[</span>MAX_N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> N<span class="token punctuation">,</span> V<span class="token punctuation">;</span><span class="token comment">//n - 物品数，v - 容量（体积） w - 价值</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">w</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">v</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//INPUT</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span>dp<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span> dp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span>dp_d<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span> dp_d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token comment">//DP</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> N<span class="token punctuation">;</span> i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> V<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> noti <span class="token operator">=</span> dp<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> geti <span class="token operator">=</span> j <span class="token operator">>=</span> v<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">?</span> dp<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j <span class="token operator">-</span> v<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> w<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token comment">//for (int j = v[i]; j &lt;= V; j++)不可！why？遍历不完全！（dp本质）</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>noti <span class="token operator">></span> geti<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//不能用>= 不然多解时会出错</span>
+                dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> noti<span class="token punctuation">;</span>
+                dp_d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> geti<span class="token punctuation">;</span>
+                dp_d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">//DP_D</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> ans<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">,</span>  j <span class="token operator">=</span> V<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;=</span> N <span class="token operator">&amp;&amp;</span> j <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span>dp_d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span>
+                i<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token number">2</span><span class="token operator">:</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">>=</span> v<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token comment">//一个补丁，bug以后补坑</span>
+                    ans<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                j <span class="token operator">-=</span> v<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                i<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> i <span class="token operator">:</span> ans<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
 <h4 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h4><p>注意：关于 j 的循环是正向的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">        for (int j = t[i]; j &lt;= T; j++) &#123;</span><br><span class="line">            dp[j] = max(dp[j], dp[j - t[i]] + v[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">for (int i &#x3D; 0; i &lt; m; i++) &#123;
+        for (int j &#x3D; t[i]; j &lt;&#x3D; T; j++) &#123;
+            dp[j] &#x3D; max(dp[j], dp[j - t[i]] + v[i]);
+        &#125;
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Tips：解题时，注意数据范围，选择合适的数据结构（eg.long long，_int128）。</p>
 <p><strong>完全背包和 01 背包的区别就在于对容量限制枚举的顺序不同</strong></p>
