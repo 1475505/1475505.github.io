@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title>C++ STL使用手册</title>
     <url>//post/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8.html</url>
-    <content><![CDATA[<p>title:        C++ STL使用手册<br>tags:        C++,语法<br>categories:    语言基础<br>feature: true</p>
-<p>#C++ STL的使用手册</p>
+    <content><![CDATA[<p>#C++ STL的使用手册</p>
 <p>[toc]</p>
 <p><img src="https://oi-wiki.org/lang/csl/images/container1.png" alt="img"></p>
 <h3 id="共有函数"><a href="#共有函数" class="headerlink" title="共有函数"></a>共有函数</h3><p><code>=</code>：有赋值运算符以及复制构造函数。</p>
@@ -256,6 +255,12 @@ bitset&lt;8&gt; bitset3(s);　　&#x2F;&#x2F;长度为10，前补0。[00010010]<
 <p>OI-wiki</p>
 <p>《算法笔记》</p>
 ]]></content>
+      <categories>
+        <category>语言基础</category>
+      </categories>
+      <tags>
+        <tag>C++,语法</tag>
+      </tags>
   </entry>
   <entry>
     <title>C++ 特性</title>
@@ -395,7 +400,7 @@ random_shuffle(a+1,a+n+1);</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>C/C++ 多维数组的处理</title>
+    <title></title>
     <url>//post/C%E4%B8%AD%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%A4%84%E7%90%86.html</url>
     <content><![CDATA[<p>笔者要用到多维数组的时候经常忘了多维数组怎么用，在此总结一下：</p>
 <p>【内容产出中】</p>
@@ -439,7 +444,7 @@ table.resize(512);&#x2F;&#x2F;512列</code></pre>
 ]]></content>
   </entry>
   <entry>
-    <title></title>
+    <title>《原神》祈愿机制概率研究</title>
     <url>//post/%E6%A6%82%E7%8E%87%E8%AE%BA%E8%AE%BA%E6%96%87.html</url>
     <content><![CDATA[<p>#《原神》祈愿机制概率研究</p>
 <p>【摘要】本文以概率论、随机过程理论等工具研究游戏《原神》中的祈愿机制，主要基于动态规划，以“期望”和“概率的概率”两大分析方向进行数据处理，并根据分析结果总结了一些方便玩家规划金钱与资源的建议。由于追求多次获得五星道具的玩家基本“不差钱”，本文附有获取少量五星情况下的数据可视化。</p>
@@ -1039,5 +1044,11 @@ plt.plot(poss)  </code></pre>
 </li>
 </ul>
 ]]></content>
+      <categories>
+        <category>数据分析</category>
+      </categories>
+      <tags>
+        <tag>原神,数据分析</tag>
+      </tags>
   </entry>
 </search>
