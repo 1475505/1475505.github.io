@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title></title>
+    <url>//post/C++STL%E7%9A%84%E4%BD%BF%E7%94%A8.html</url>
+    <content><![CDATA[<p>title:        C++ STL使用手册<br>tags:        C++,语法<br>categories:    语言基础<br>feature: true</p>
+<p>#C++ STL的使用手册</p>
+<p>[toc]</p>
+<p><img src="https://oi-wiki.org/lang/csl/images/container1.png" alt="img"></p>
+<h3 id="共有函数"><a href="#共有函数" class="headerlink" title="共有函数"></a>共有函数</h3><p><code>=</code>：有赋值运算符以及复制构造函数。</p>
+<p><code>begin()</code>：返回指向开头元素的迭代器。</p>
+<p><code>end()</code>：返回指向末尾的下一个元素的迭代器。<code>end()</code> <strong>不指向某个元素</strong>，它是末尾元素的后继。</p>
+<p><code>size()</code>：返回容器内的元素个数。</p>
+<p><code>max_size()</code>：返回容器 <strong>理论上</strong> 能存储的最大元素个数。依容器类型和所存储变量的类型而变。</p>
+<p><code>empty()</code>：返回容器是否为空的一个 <code>bool</code> 值，即 <code>begin() == end()</code>，<code>true</code> 为空，<code>false</code> 为非空。</p>
+<p><code>swap()</code>：交换两个容器。</p>
+<p><code>clear()</code>：清空容器。</p>
+<p><code>==</code>/<code>!=</code>/<code>&lt;</code>/<code>&gt;</code>/<code>&lt;=</code>/<code>&gt;=</code>：按 <strong>字典序</strong> 比较两个容器的大小。（比较元素大小时 <code>map</code> 的每个元素相当于 <code>set&lt;pair&lt;key, value&gt; &gt;</code>，<code>pair</code> 按 first 到 second 的顺序比较。无序容器不支持 <code>&lt;</code>/<code>&gt;</code>/<code>&lt;=</code>/<code>&gt;=</code></p>
+<h2 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h2><h3 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h3><p><strong>元素访问</strong></p>
+<ol>
+<li><p><code>at()</code></p>
+<p><code>v.at(pos)</code> 返回容器中下标为 <code>pos</code> 的引用。如果数组越界抛出 <code>std::out_of_range</code> 类型的异常。</p>
+</li>
+<li><p><code>operator[]</code></p>
+<p><code>v[pos]</code> 返回容器中下标为 <code>pos</code> 的引用。不执行越界检查。</p>
+</li>
+<li><p><code>front()</code></p>
+<p><code>v.front()</code> 返回首元素的引用。</p>
+</li>
+<li><p><code>back()</code></p>
+<p><code>v.back()</code> 返回末尾元素的引用。</p>
+</li>
+</ol>
+<p><strong>迭代器</strong></p>
+<ol>
+<li><p><code>begin()/cbegin()</code></p>
+<p>返回指向首元素的迭代器，其中 <code>*begin = front</code>。</p>
+</li>
+<li><p><code>end()/cend()</code></p>
+<p>返回指向数组尾端占位符的迭代器，注意是没有元素的。</p>
+</li>
+</ol>
+<p> 可以认为，<code>v[i]</code>与<code>*(v.begin()+i)</code>等价。但，<strong>除<code>vector</code> <code>string</code>外</strong>，其他STL容器不支持后者的形式。</p>
+<ul>
+<li><p><code>size()</code> 返回容器长度（元素数量），即 <code>std::distance(v.begin(), v.end())</code>。</p>
+</li>
+<li><p><code>insert()</code> 支持在某个迭代器位置插入元素、可以插入多个。<strong>复杂度与 <code>pos</code> 距离末尾长度成线性而非常数</strong></p>
+</li>
+<li><p><code>erase()</code> 删除某个<strong>迭代器或者区间的元素</strong>，返回最后被删除的迭代器。复杂度与 <code>insert</code> 一致。</p>
+</li>
+<li><p><code>push_back(x)</code> 在末尾插入一个元素x，均摊复杂度：常数，最坏为线性复杂度。</p>
+</li>
+<li><p><code>pop_back()</code> 删除末尾元素，常数复杂度。</p>
+</li>
+</ul>
+<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><p>能够提供线性复杂度的插入和删除，以及常数复杂度的随机访问。操作大同<code>vector</code>。</p>
+<ul>
+<li><p><code>push_front()</code> 在头部插入一个元素。</p>
+</li>
+<li><p><code>pop_front()</code> 删除头部元素。</p>
+</li>
+<li><p><code>push_back()</code> 在末尾插入一个元素。</p>
+</li>
+<li><p><code>pop_back()</code> 删除末尾元素。</p>
+</li>
+</ul>
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p>与<code>deque</code>大致相同，但是由于 <code>list</code> 的实现是链表，因此不提供随机访问的接口。若需要访问中间元素，则需要使用迭代器。</p>
+<ul>
+<li><p><code>front()</code> 返回首元素的引用。</p>
+</li>
+<li><p><code>back()</code> 返回末尾元素的引用。</p>
+</li>
+</ul>
+<h3 id="array-C-11"><a href="#array-C-11" class="headerlink" title="array(C++11)"></a>array(C++11)</h3><table>
+<thead>
+<tr>
+<th align="left">成员函数</th>
+<th align="left">作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>operator=</code></td>
+<td align="left"><code>array2</code> 的每个元素重写 <code>array1</code> 对应元素</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><code>max_size</code></td>
+<td align="left">返回可容纳的最大元素数</td>
+<td></td>
+</tr>
+<tr>
+<td align="left"><code>fill</code></td>
+<td align="left">以指定值填充容器</td>
+<td>arr.fill(1);</td>
+</tr>
+<tr>
+<td align="left"><code>swap</code></td>
+<td align="left">交换，交换array的复杂度为：O(size)</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">非成员函数</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>operator==</code></td>
+<td align="left">按照字典序比较 <code>array</code> 中的值</td>
+</tr>
+<tr>
+<td align="left"><code>std::get</code></td>
+<td align="left">访问 <code>array</code> 的一个元素</td>
+</tr>
+</tbody></table>
+<h2 id="关联式容器"><a href="#关联式容器" class="headerlink" title="关联式容器"></a>关联式容器</h2><h3 id="统一共有函数"><a href="#统一共有函数" class="headerlink" title="统一共有函数"></a>统一共有函数</h3><ul>
+<li><p><code>find(x)</code>: 若容器内存在键为 x 的元素，会返回该元素的迭代器；否则返回 <code>end()</code>。</p>
+<p><img src="C:\Users\ll\AppData\Roaming\Typora\typora-user-images\image-20211015124758889.png" alt="image-20211015124758889"></p>
+</li>
+<li><p><code>erase(pos)</code> 删除迭代器为 pos 的元素，可结合<code>find</code>函数使用。</p>
+</li>
+<li><p><code>erase(first,last)</code> 删除迭代器在 [first,last)范围内的所有元素。</p>
+</li>
+<li><p><code>count(x)</code>: 返回容器内键为 x 的元素数量。</p>
+</li>
+<li><p><code>lower_bound(x)</code>: 返回指向首个<strong>不小于</strong> 给定<strong>键</strong>的元素的迭代器。</p>
+</li>
+<li><p><code>upper_bound(x)</code>: 返回指向首个**大于 **给定键的元素的迭代器。若容器内所有元素均小于或等于给定键，返回 <code>end()</code>。</p>
+</li>
+<li><p><code>size()</code>: 返回容器内元素个数。</p>
+</li>
+</ul>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p><code>set</code> 内部采用红黑树实现。平衡二叉树的特性使得 <code>set</code> 非常适合处理需要同时兼顾查找、插入与删除的情况。</p>
+<ul>
+<li><code>insert(x)</code> 将元素 x 插入到 <code>set</code> 中。自动排序和去重。</li>
+<li><code>erase(x)</code> 删除值为 x 的 <strong>所有</strong> 元素，返回删除元素的个数。</li>
+<li><code>erase(first,last)</code> 删除迭代器在 [first,last)范围内的所有元素。</li>
+</ul>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p><code>map</code> 重载了 <code>operator[]</code>，可以用任意定义了 <code>operator &lt;</code> 的类型作为下标（在 <code>map</code> 中叫做 <code>key</code>，也就是索引）。</p>
+<ul>
+<li>可以直接通过下标访问来进行查询或插入操作。例： <code>mp[&quot;Alan&quot;]=100</code>。利用下标访问 时，如果 <code>map</code> 中不存在相应键的元素，会自动在 <code>map</code> 中插入一个新元素，并将其值设置为默认值（对于整数，值为零；对于有默认构造函数的类型，会调用默认构造函数进行初始化）</li>
+<li>通过向 <code>map</code> 中插入一个类型为 <code>pair&lt;Key, T&gt;</code> 的值可以达到插入元素的目的，例如 <code>mp.insert(pair&lt;string,int&gt;(&quot;Alan&quot;,100));</code></li>
+<li><code>erase(key)</code> 函数会删除键为 <code>key</code> 的 <strong>所有</strong> 元素。返回值为删除元素的数量。</li>
+</ul>
+<h2 id="哈希适配容器"><a href="#哈希适配容器" class="headerlink" title="哈希适配容器"></a>哈希适配容器</h2><p>四种基于哈希实现的无序关联式容器：<code>unordered_set</code>，<code>unordered_multiset</code>，<code>unordered_map</code>，<code>unordered_multimap</code>。</p>
+<p>其操作与关联式容器类似。</p>
+<h2 id="容器适配器"><a href="#容器适配器" class="headerlink" title="容器适配器"></a>容器适配器</h2><p>为什么称为容器适配器呢，是因为其内部的实现是基于<code>vector</code>  <code>deque </code> 等等，其原理可以参考《STL源码剖析》。</p>
+<h3 id="后进先出的stack"><a href="#后进先出的stack" class="headerlink" title="后进先出的stack"></a>后进先出的stack</h3><p>仅支持查询或删除最后一个加入的元素（栈顶元素），不支持随机访问。</p>
+<ul>
+<li><code>top()</code> 访问栈顶元素（如果栈为空，此处会出错）</li>
+<li><code>push(x)</code> 向栈中插入元素 x</li>
+<li><code>pop()</code> 删除栈顶元素</li>
+</ul>
+<h3 id="先进先出的queue"><a href="#先进先出的queue" class="headerlink" title="先进先出的queue"></a>先进先出的queue</h3><ul>
+<li><code>front()</code> 访问队首元素（如果队列为空，此处会出错）</li>
+<li><code>push(x)</code> 向队列中插入元素 x</li>
+<li><code>pop()</code> 删除队首元素</li>
+</ul>
+<h3 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h3><ul>
+<li><p><code>top()</code> 访问堆顶元素（此时优先队列不能为空）</p>
+</li>
+<li><p><code>push(x)</code> 插入元素，并对底层容器排序</p>
+</li>
+<li><p><code>pop()</code> 删除堆顶元素（此时优先队列不能为空）</p>
+</li>
+</ul>
+<p>以上<code>pop</code>方法，返回已删除元素的值。</p>
+<ul>
+<li><p>优先级的定义：</p>
+<p>对于数字，一般是值大者优先。即默认为：</p>
+<p><code>priority_queue&lt;int,vector&lt;int&gt;,less&lt;int&gt; &gt; pq;</code></p>
+<p>第二个参数是内部实现方式；第三个参数  <strong>less表示数字大的优先级越大。如果是<code>greater&lt;int&gt;</code>，则为数字小者优先级大。</strong>优先级大者，位于<code>top</code>。</p>
+<p>结构体也可以定义优先级，可以通过<code>cmp</code>函数或者重载<code>&lt;</code>运算符实现。这种思路也适用于其他关联式容器。</p>
+</li>
+</ul>
+<h3 id="pair的常见用法"><a href="#pair的常见用法" class="headerlink" title="pair的常见用法"></a>pair的常见用法</h3><p>头文件：<code>&lt;utility&gt;</code></p>
+<p>按照正常的结构体访问（first，second…）。</p>
+<h3 id="string的常见用法"><a href="#string的常见用法" class="headerlink" title="string的常见用法"></a>string的常见用法</h3><p><code>string</code>的实现形式类似于字符型<code>vector</code>，支持<code>push_back</code>、直接赋值（注意使用<strong>双引号</strong>）和下标访问。只支持<code>cin</code> <code>cout</code>，不支持<code>printf</code>等。</p>
+<ul>
+<li><p>可以通过加减运算符实现字符串拼接和删减、比较运算符进行字典序比较。</p>
+</li>
+<li><p><code>substr(pos,len)</code>方法截取子串。时间复杂度是O（len）。</p>
+</li>
+<li><p><code>find(x,pos)</code>指定了开始寻找的位置为下标<code>pos</code></p>
+</li>
+<li><p>上面的共有函数（<code>erase</code> <code>find</code>等）也是支持的。复杂度都是O(n)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">string s1 &#x3D; &quot;Hello&quot;;
+string s2 &#x3D; &quot;world&quot;;
+s1.insert(3,s2);&#x2F;&#x2F;Helworldlo</code></pre></li>
+</ul>
+<h3 id="STL算法"><a href="#STL算法" class="headerlink" title="STL算法"></a>STL算法</h3><p>在《特性》篇也介绍有一些用法。</p>
+<ul>
+<li><code>find_end</code>：逆序查找。<code>find_end(v.begin(), v.end(), value)</code>。</li>
+<li><code>nth_element</code>：按指定范围进行分类，即找出序列中第 <em>n</em> 大的元素，使其左边均为小于它的数，右边均为大于它的数。<code>nth_element(v.begin(), v.begin() + mid, v.end(), cmp)</code> 或 <code>nth_element(a + begin, a + begin + mid, a + end, cmp)</code></li>
+<li><code>next_permutation</code>：将当前排列更改为 <strong>全排列中的下一个排列</strong>。如果当前排列已经是 <strong>全排列中的最后一个排列</strong>（元素完全从大到小排列），函数返回 <code>false</code> 并将排列更改为 <strong>全排列中的第一个排列</strong>（元素完全从小到大排列）；否则，函数返回 <code>true</code>。<code>next_permutation(v.begin(), v.end())</code> 或 <code>next_permutation(v + begin, v + end)</code>。</li>
+</ul>
+<h3 id="bitset"><a href="#bitset" class="headerlink" title="bitset"></a>bitset</h3><p>通过固定的优化，使得一个字节的八个比特能分别储存 8 位的 <code>0/1</code>。</p>
+<p>头文件：<code>&lt;bitset&gt;</code></p>
+<ul>
+<li><code>bitset()</code>: 每一位都是 <code>false</code>。</li>
+<li><code>bitset(int val)</code>: 设为 <code>val</code> 的二进制形式。</li>
+<li><code>bitset(const string&amp; str)</code>: 设为 01 串 <code>str</code>。</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">bitset&lt;4&gt; bitset1;　　&#x2F;&#x2F;无初始化下，默认每一位均为0
+bitset&lt;8&gt; bitset2(16);　&#x2F;&#x2F;保存长度为8的16的二进制表示：[00010000]
+string s &#x3D; &quot;10010&quot;;
+bitset&lt;8&gt; bitset3(s);　　&#x2F;&#x2F;长度为10，前补0。[00010010]</code></pre>
+
+<ul>
+<li><p><code>operator []</code>: 访问其特定的一位。</p>
+</li>
+<li><p><code>operator ==/!=</code>: 比较两个 <code>bitset</code> 内容是否完全一样。</p>
+</li>
+<li><p><code>operator &amp;/&amp;=/|/| =/^/^=/~</code>: 进行按位与/或/异或/取反操作。**<code>bitset</code> 只能与 <code>bitset</code> 进行位运算**，若要和整型进行位运算，要先将整型转换为 <code>bitset</code>。</p>
+</li>
+<li><p><code>operator &lt;&gt;/&lt;&lt;=/&gt;&gt;=</code>: 进行二进制左移/右移。</p>
+</li>
+<li><p><code>operator &lt;&gt;</code>: 流运算符，这意味着你可以通过 <code>cin/cout</code> 进行输入输出。</p>
+</li>
+<li><p><code>count()</code>: 返回 <code>true</code> 的数量。</p>
+</li>
+<li><p><code>size()</code>: 返回 <code>bitset</code> 的大小。</p>
+</li>
+<li><p><code>test(pos)</code>: 它和 <code>vector</code> 中的 <code>at()</code> 的作用是一样的，和 <code>[]</code> 运算符的区别就是越界检查。</p>
+</li>
+<li><p><code>to_string()</code>: 返回转换成的字符串表达。</p>
+</li>
+<li><p><code>to_ulong()</code>: 返回转换成的 <code>unsigned long</code> 表达 (<code>long</code> 在 NT 及 32 位 POSIX 系统下与 <code>int</code> 一样，在 64 位 POSIX 下与 <code>long long</code> 一样）。</p>
+</li>
+<li><p><code>to_ullong()</code>:<em>C++11</em>，返回转换成的 <code>unsigned long long</code> 表达。</p>
+</li>
+<li><p><code>any()</code>: 若存在某一位是 <code>true</code> 则返回 <code>true</code>，否则返回 <code>false</code>。</p>
+</li>
+<li><p><code>none()</code>: 若所有位都是 <code>false</code> 则返回 <code>true</code>，否则返回 <code>false</code>。</p>
+</li>
+<li><p><code>all()</code>:<em>C++11</em>，若所有位都是 <code>true</code> 则返回 <code>true</code>，否则返回 <code>false</code>。</p>
+</li>
+<li><p><code>set()</code>: 将整个 <code>bitset</code> 设置成 <code>true</code>。</p>
+<p><code>set(pos, val = true)</code>: 将某一位设置成 <code>true</code>/<code>false</code>。</p>
+</li>
+<li><p><code>reset()</code>: 将整个 <code>bitset</code> 设置成 <code>false</code>。</p>
+<p><code>reset(pos)</code>: 将某一位设置成 <code>false</code>。相当于 <code>set(pos, false)</code>。</p>
+</li>
+<li><p><code>flip()</code>: 翻转每一位。（01互换，相当于异或一个全是1 的 <code>bitset</code>）</p>
+<p><code>flip(pos)</code>: 翻转某一位。</p>
+</li>
+<li><p><code>_Find_first()</code>: 返回 <code>bitset</code> 第一个 <code>true</code> 的下标，若没有 <code>true</code> 则返回 <code>bitset</code> 的大小。</p>
+</li>
+<li><p><code>_Find_next(pos)</code>: 返回 <code>pos</code> 后面（下标严格大于 <code>pos</code> 的位置）第一个 <code>true</code> 的下标，若 <code>pos</code> 后面没有 <code>true</code> 则返回 <code>bitset</code> 的大小。</p>
+</li>
+</ul>
+<p>参考资料：</p>
+<p>OI-wiki</p>
+<p>《算法笔记》</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>C++ 特性</title>
+    <url>//post/%E4%BB%8EC%E8%BF%9B%E6%AD%A5%E5%88%B0C++%E2%80%94%E2%80%94%E7%89%B9%E6%80%A7.html</url>
+    <content><![CDATA[<h1 id="从C进步到C-——特性"><a href="#从C进步到C-——特性" class="headerlink" title="从C进步到C++——特性"></a>从C进步到C++——特性</h1><p>[TOC]</p>
+<h2 id="结构体初始化构造"><a href="#结构体初始化构造" class="headerlink" title="结构体初始化构造"></a>结构体初始化构造</h2><p>定义结构体时，加入以下语句，可以方便地进行初始化。</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">struct student&#123;
+	int id;
+	char gender;
+	
+	student()&#123;&#125;  &#x2F;&#x2F;系统默认，用于未经初始化定义结构体
+	
+	student (int _id, char _gender )&#123;
+		id &#x3D; _id;
+		gender &#x3D; _gender;
+	&#125;&#x2F;&#x2F;用于初始化id和gender。注意：减少参数 可以达到只使用部分元素构造的效果
+&#125;</code></pre>
+
+<p>构造函数可以简化为一行，并且可以进行默认赋值，如此调用时可以省略对应参数。如：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Point (int x&#x3D;0 , int y &#x3D; 0):x(x),y(y) &#123;&#125;;
+&#x2F;&#x2F;Point();</code></pre>
+
+
+
+<p>这是一个二叉树节点的定义示例：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">struct TreeNode &#123;
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;
+&#125;;</code></pre>
+
+
+
+<h2 id="auto声明推断"><a href="#auto声明推断" class="headerlink" title="auto声明推断"></a>auto声明推断</h2><p>使用STL容器时的迭代器声明等等往往比较复杂，此时使用 <code>auto</code> 可简单很多：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">vector&lt;int&gt; vec;
+auto pvec &#x3D; vec.begin();&#x2F;&#x2F;vector&lt;int&gt;::iterator</code></pre>
+
+
+
+<h2 id="容器类for-range循环"><a href="#容器类for-range循环" class="headerlink" title="容器类for-range循环"></a>容器类for-range循环</h2><p>对数组或容器执行循环操作可写成：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">double prices[5] &#x3D; &#123;1.1 , 2.2 , 3.3 , 4.4 , 5.5&#125;
+for ( double x : prices)&#123;&#x2F;&#x2F;只读
+	cout&lt;&lt;x&lt;&lt;endl;
+&#125;
+for ( double &amp;x : prices)&#123;&#x2F;&#x2F;写需要使用指针
+	x &#x3D; x &#x2F; 2;
+&#125;</code></pre>
+
+
+
+<p>结合上面的auto 部分循环可以写成：</p>
+<pre class="line-numbers language-none"><code class="language-none">for ( auto x : vec )</code></pre>
+
+
+
+<h2 id="string类的类型转换函数"><a href="#string类的类型转换函数" class="headerlink" title="string类的类型转换函数"></a>string类的类型转换函数</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int i &#x3D; 43;
+string s &#x3D; to_string(i);
+double d &#x3D; stod(s);&#x2F;&#x2F;43.000000
+&#x2F;&#x2F;对应的有：stoi , stoll , stof</code></pre>
+
+<p><strong>注意不要传入空串！</strong></p>
+<h2 id="rotate-copy-fill函数"><a href="#rotate-copy-fill函数" class="headerlink" title="rotate/copy/fill函数"></a>rotate/copy/fill函数</h2><p>rotate函数可以“平移”。直接看例子吧：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vector&lt;int&gt; a&#123;1,2,3,4,5,6,7,8,9&#125;;
+rotate(a.begin() , a.begin()+2 , a.end());
+&#x2F;&#x2F;a:[3,4,5,6,7,8,9,1,2]</code></pre>
+
+<p>相当于得到：[mid:end] + [begin:mid)</p>
+<p>copy函数将一个目标（容器、数组）里面的元素复制至另一个目标。</p>
+<p><strong>注：使用前 <code>newvector.resize(7) </code>这行代码为<code>newvector</code>分配空间，防止程序崩溃</strong>。</p>
+<p>此外，通过<code>vector&lt;int&gt;  dp ( 7 , 0 )</code>也可以达到初始化<code>dp</code>为[0,0,0,0,0,0,0].</p>
+<p>fill函数可以为数组和vector赋初始值。头文件：<code>&lt;algorithm&gt;</code></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int v[10];
+fill(v,v+10,-1);&#x2F;&#x2F;相当于 memset(v,-1,sizeof v);
+int s[10][10];
+fill(s[0],s[0]+10*10,-1);</code></pre>
+
+
+
+<h2 id="sort-lower-bound-upper-bound-unique函数"><a href="#sort-lower-bound-upper-bound-unique函数" class="headerlink" title="sort/lower_bound/upper_bound/unique函数"></a>sort/lower_bound/upper_bound/unique函数</h2><p>sort函数可用于 <code>vector </code>、 数组 和 <code>deque</code> 的排序。如：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">sort(b,b+n,greater&lt;int&gt;());&#x2F;&#x2F;将b降序排列</code></pre>
+
+<p>在<strong>已排好升序</strong>的情况下：</p>
+<p>1.可使用lower_bound函数（<code>startptr</code>，<code>endptr</code> ，<code>num</code>）得到第一个不小于<code>num</code>的值的指针。（二分查找）。如下代码返回下标：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int a[10];&#x2F;&#x2F;......
+int b &#x3D; upper_bound(a , a+10 , 3) - a;</code></pre>
+
+<p>2.可使用unique函数返回最后一个非重复元素的指针，如下代码进行<strong>去重</strong>。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec.erase( unique(vec.begin(),vec.end()) , vec.end() );</code></pre>
+
+<p>拓展排序：partial_sort 方法</p>
+<h2 id="局部排序partiai-sort"><a href="#局部排序partiai-sort" class="headerlink" title="局部排序partiai_sort"></a>局部排序<code>partiai_sort</code></h2><p>可以提供一定区间的排序获得。原理似乎是堆排序。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">for(i&#x3D;10;i&gt;&#x3D;1;i--)	vec.push_back(i);
+partial_sort(vec.begin(),vec.begin()+3,vec.end());
+&#x2F;&#x2F;[1,2,3,10,9,8,7,6,5,4]
+
+rep(i,1,10) a.push_back(i);
+partial_sort(vec.begin(),vec.begin()+3,vec.end(),greater&lt;int&gt;());
+&#x2F;&#x2F;[10,9,8,1,2,3,4,5,6,7]</code></pre>
+
+<p>应用：班上有10个学生，我想知道分数最低的5名是哪些人。如果没有partial_sort，你就需要用sort把所有人排好序，然后再取前5个。现在你只需要对分数最低5名排序。</p>
+<h2 id="一些可能有用的数学函数"><a href="#一些可能有用的数学函数" class="headerlink" title="一些可能有用的数学函数"></a>一些可能有用的数学函数</h2><p><strong>指对运算</strong></p>
+<p>以下函数：接收x为<code>float</code>    <code>double</code>类型，返回传入类型。</p>
+<p><code>exp2(x)</code>  - 快速返回2的x次幂。</p>
+<p><code>log2(x)</code> - 得到以2为底x的对数。</p>
+<p><code>log10(x)</code> - 得到以10为底x的对数。</p>
+<p><code>log(x)</code>  - 得到x的自然对数。</p>
+<p><code>expm(x)</code> - 返回e的x次幂-1。</p>
+<p><code>exp(x)</code> - 得到e的x次幂。x支持complex类型。</p>
+<p><strong>取整函数</strong></p>
+<p>以下函数的传入传出同上。</p>
+<p><code>floor(x)</code> - 向下取整。</p>
+<p><code>ceil(x)</code> - 向上取整。 </p>
+<p><code>round(x)</code> - 四舍五入，基本类似于<code>floor(x+0.5)</code>。<strong>但是中点情况下向远离0的方向舍入</strong>。</p>
+<p><code>trunc(x)</code> - 将x向0方向舍入。</p>
+<h2 id="数组生成-iota-shuffle"><a href="#数组生成-iota-shuffle" class="headerlink" title="数组生成- iota/shuffle"></a>数组生成- iota/shuffle</h2><p>递增数组：与 <code>golang </code>可对比：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">iota(arr,arr+n,0);&#x2F;&#x2F;[0,1,2,3,4,...];</code></pre>
+
+<p>随机打乱数组：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">srand(time(NULL));
+random_shuffle(a+1,a+n+1);</code></pre>
+
+<p><code>random_shuffle</code> 自 C++14 起被弃用，C++17 起被移除。可以使用 <code>shuffle</code> 函数代替：</p>
+<p><code>shuffle(v.begin(),v.end(),rand)</code>（最后一个参数传入的是使用的随机数生成器，一般情况下传入 <code>rand</code> 即可）。</p>
+<p>使用时需要设置随机数种子，配合<code>iota</code>可以实现类似于“洗牌”的效果。同时可进行随机的多次模拟，为了时间种子的不同，可能需要每次模拟间设置<code>sleep</code>间隔。</p>
+<p>参考资料：</p>
+<p>《C++ Primer》 目录</p>
+<p>《C++ Primer Plus》  18.1</p>
+<p>《算法竞赛入门经典习题解答》第一章</p>
+<p><a href="http://www.cppblog.com/mzty/archive/2005/12/15/1770.aspx">http://www.cppblog.com/mzty/archive/2005/12/15/1770.aspx</a></p>
+]]></content>
+      <categories>
+        <category>语言基础</category>
+      </categories>
+      <tags>
+        <tag>C++,语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C/C++ 多维数组的处理</title>
+    <url>//post/C%E4%B8%AD%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%A4%84%E7%90%86.html</url>
+    <content><![CDATA[<p>笔者要用到多维数组的时候经常忘了多维数组怎么用，在此总结一下：</p>
+<p>【内容产出中】</p>
+<p>1.二维数组的函数调用实例</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;&#x2F;声明
+void bubbleSort(float (*num)[40],int size);
+&#x2F;&#x2F;调用
+bubbleSort( stu , 40);
+&#x2F;&#x2F;思想：二维数组——数组的数组</code></pre>
+
+<p>2.把二维数组当一维数组进行赋值：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">int *p&#x3D;&amp;a[0][0];&#x2F;&#x2F;获取二维数组首地址
+for(int i&#x3D;0;i&lt;6;i++)
+&#123;
+scnaf(&quot;%d&quot;,p);
+p++;
+&#125;</code></pre>
+
+<p>3.使用 C++ 容器时，若可以使用<code>at</code>等方法获得对应元素，以缓解运算符<code>[]</code>的不稳定性问题。</p>
+<p>如： array（C++11）</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>at</code></td>
+<td>访问指定的元素，同时进行越界检查<code>at</code> 若遇 <code>pos &gt;= size()</code> 的情况会抛出 <code>std::out_of_range</code>。</td>
+</tr>
+<tr>
+<td><code>operator[]</code></td>
+<td>访问指定的元素，<strong>不</strong> 进行越界检查</td>
+</tr>
+</tbody></table>
+<p>4.多维vector的行列空间预留</p>
+<pre class="line-numbers language-none"><code class="language-none">vector&lt;vector&lt;bool&gt; &gt; table(256);&#x2F;&#x2F;256行
+table.resize(512);&#x2F;&#x2F;512列</code></pre>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>动态规划的优化</title>
+    <url>//post/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96.html</url>
+    <content><![CDATA[<h2 id="动态规划的优化策略"><a href="#动态规划的优化策略" class="headerlink" title="动态规划的优化策略"></a>动态规划的优化策略</h2><h3 id="单调队列-单调栈优化"><a href="#单调队列-单调栈优化" class="headerlink" title="单调队列/单调栈优化"></a>单调队列/单调栈优化</h3><h4 id="单调队列"><a href="#单调队列" class="headerlink" title="单调队列"></a>单调队列</h4><p>eg.[<a href="http://poj.org/problem?id=2823">Poj2823 - 滑动窗口</a>]给予一个长度为n的数组，输出每k个连续元素中的最大值和最小值。</p>
+<p>解：使用STL容器deque，维护一个单调的数列。以求最小值为例，操作包括：</p>
+<p>序列例：1 3 -1 -3 5 3 6 7。</p>
+<p>维护递增的队列，操作如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">队列状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1 入队</td>
+<td align="left"><code>&#123;1&#125;</code></td>
+</tr>
+<tr>
+<td align="left">3 比 1 大，3 入队</td>
+<td align="left"><code>&#123;1 3&#125;</code></td>
+</tr>
+<tr>
+<td align="left">-1 比队列中所有元素小，所以队列被清空， -1 入队</td>
+<td align="left"><code>&#123;-1&#125;</code></td>
+</tr>
+<tr>
+<td align="left">-3 比队列中所有元素小，所以队列被清空， -3 入队</td>
+<td align="left"><code>&#123;-3&#125;</code></td>
+</tr>
+<tr>
+<td align="left">5 比 -3 大，直接入队</td>
+<td align="left"><code>&#123;-3 5&#125;</code></td>
+</tr>
+<tr>
+<td align="left">3 比 5 小，5 出队，3 入队</td>
+<td align="left"><code>&#123;-3 3&#125;</code></td>
+</tr>
+<tr>
+<td align="left">-3 已经在窗体外(越界)，所以 -3 出队；6 比 3 大，6 入队</td>
+<td align="left"><code>&#123;3 6&#125;</code></td>
+</tr>
+<tr>
+<td align="left">7 比 6 大，7 入队</td>
+<td align="left"><code>&#123;3 6 7&#125;</code></td>
+</tr>
+</tbody></table>
+<p>即包括：</p>
+<p>1.当满足“若待入列数比先进列的数还要小”，可将其前面的数尽数 “弹出”，再将该数 push 进队尾。因此，前面的数先出列，不可能是最大值。</p>
+<p>2.需要 site 数组记录第 i 个队中的数在原数组中的位置，以弹出越界的队头。</p>
+<p>3.输出时只需输出队头即可。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">for (int i &#x3D; 0; i &lt; m; i++) &#123;
+    if (i &gt;&#x3D; n - 1) &#123;
+        while (!que.empty() &amp;&amp; que.front().second &lt;&#x3D; i - n) &#123;
+            que.pop_front();
+        &#125;
+    &#125;
+    while (!que.empty() &amp;&amp; a[i] &lt; que.back().first) &#123;
+        que.pop_back();
+    &#125;
+    que.push_back(P(a[i], i));
+    if (i &gt;&#x3D; n - 1)
+        cout &lt;&lt; que.front().first &lt;&lt; &quot; &quot;;
+&#125;</code></pre>
+
+<p>####单调栈</p>
+<p>与单调队列相比，其只在一端进行进出。单调队列主要处理的是一个区间内的最大/小值，而单调栈处理的是寻找以某个值为最小/大值的最大区间。参考<a href="https://blog.csdn.net/lucky52529/article/details/89155694">lucky52529的博客</a></p>
+<pre class="line-numbers language-none"><code class="language-none">for (遍历)
+&#123;
+	if (栈空 || 栈顶元素大于等于当前比较元素)
+		入栈;
+	else&#123;
+		while (栈不为空 &amp;&amp; 栈顶元素小于当前元素)&#123;
+			栈顶元素出栈;
+			更新结果;
+		&#125;
+		当前数据入栈;
+	&#125;
+&#125;</code></pre>
+
+
+
+<p>其中需要注意的是：</p>
+<p>1.对于某些特殊题目，栈内元素出不完，遗留在栈里面的人还没有考虑，导致答案错误，这时候我们要添加结束标识符强制清空栈。比如：</p>
+<pre class="line-numbers language-none"><code class="language-none">vec.push_back(INF);&#x2F;&#x2F;对于单调递增栈（栈顶最小），补充结束标识符，使最后清空栈</code></pre>
+
+<p>2.我们进行栈的处理时，是在出栈操作时进行的。</p>
+<p>模板题练习：[<a href="https://www.luogu.com.cn/problem/P5788">洛谷P5788</a>]</p>
+<pre class="line-numbers language-none"><code class="language-none"></code></pre>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>算法进阶</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>//post/%E6%95%B0%E5%AD%A6%E4%B9%8B%E7%BE%8E%E6%91%98%E6%8A%84.html</url>
+    <content><![CDATA[<h1 id="数学之美摘抄"><a href="#数学之美摘抄" class="headerlink" title="数学之美摘抄"></a>数学之美摘抄</h1><p>合理利用信息，而非玩弄什么公式和机器学习算法，是做好搜索的关键。</p>
+<p>先帮用户解决 80% 的问题，再慢慢解决剩下的 20% 问题。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>算法模板</title>
+    <url>//post/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF.html</url>
+    <content><![CDATA[<h1 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h1><p>[TOC]</p>
+<p>解决一个回溯问题，实际上就是一个决策树的遍历过程，使用 <code>isValid</code> 函数剪枝。回溯算法模板框架如下：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void backtracking(参数) &#123;
+    if (结束遍历条件) &#123;
+        存放结果;
+        return;
+    &#125;
+
+    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) &#123;
+        if (!isValid(..)) 	continue;&#x2F;&#x2F;&#x2F;&#x2F; 排除不合法选择
+        处理节点;
+        backtracking(路径，选择列表); &#x2F;&#x2F; 深入
+        撤销节点处理；
+    &#125;
+&#125;</code></pre>
+
+<p>对于<code>isValid</code>函数及剪枝策略，回溯法求最值时，可以通过贪心思想找到一个“较优解”，减去差于其的枝。(分支限界法)</p>
+<p>回溯与 DFS 的思想很类似，区别主要在于解空间的表示和处理：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">for 循环内：
+record[son] &#x3D; 1; &#x2F;&#x2F; 标记使用&#x2F;状态
+dfs(deep + 1); &#x2F;&#x2F; dfs 下一层
+record[son] &#x3D; 0; &#x2F;&#x2F; 取消标记&#x2F;状态</code></pre>
+
+<p><strong>在递归之前做出选择，在递归之后撤销刚才的选择</strong>。</p>
+<p>解空间的状态表示主要有： 排列树 和 组合树 两种。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210130173631174.png" alt="回溯算法理论基础"></p>
+<p>口诀：for循环，换子树；递归调用往深溯</p>
+<h2 id="示例：生成全排列"><a href="#示例：生成全排列" class="headerlink" title="示例：生成全排列"></a>示例：生成全排列</h2><p><img src="https://github.com/labuladong/fucking-algorithm/raw/master/pictures/backtracking/3.jpg" alt="img"></p>
+<h2 id="n-皇后问题的-位运算解法-及-bitset-包"><a href="#n-皇后问题的-位运算解法-及-bitset-包" class="headerlink" title="n-皇后问题的 位运算解法 及 bitset 包"></a>n-皇后问题的 位运算解法 及 bitset 包</h2><h3 id="bitset"><a href="#bitset" class="headerlink" title="bitset"></a>bitset</h3><p>bitset 头文件中，有一种类似数组的结构，它的每一个元素只能是０或１，每个元素仅用１bit空间，名为 bitset 。构造方式：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">bitset&lt;4&gt; bitset1;　　&#x2F;&#x2F;无初始化下，默认每一位均为0
+bitset&lt;8&gt; bitset2(16);　&#x2F;&#x2F;保存长度为8的16的二进制表示：[00010000]
+string s &#x3D; &quot;10010&quot;;
+bitset&lt;8&gt; bitset3(s);　　&#x2F;&#x2F;长度为10，前补0。[00010010]</code></pre>
+
+
+
+<p>bitset 支持一些按位的位运算，且支持to_string类型转换。</p>
+<p>对于一个叫做bit的bitset：<br>bit.size()       返回大小（位数）<br>bit.count()     返回1的个数<br>bit.any()       返回是否有1<br>bit.none()      返回是否没有1<br>bit.set()       全都变成1<br>bit.set(p)      将第p + 1位变成1（bitset是从第0位开始的！）<br>bit.set(p, x)   将第p + 1位变成x<br>bit.reset()     全都变成0<br>bit.reset(p)    将第p + 1位变成0<br>bit.flip()      全都取反<br>bit.flip(p)     将第p + 1位取反<br>bit.to_ulong()  返回它转换为unsigned long的结果，如果超出范围则报错<br>bit.to_ullong() 返回它转换为unsigned long long的结果，如果超出范围则报错</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>动态规划初步</title>
+    <url>//https://oi-wiki.org/dp/knapsack/</url>
+    <content><![CDATA[<h1 id="动态规划初步"><a href="#动态规划初步" class="headerlink" title="动态规划初步"></a>动态规划初步</h1><p>[toc]</p>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>动态规划实际是“聪明地枚举”，会遍历所有可能的情况。对其中的“剪枝”（不丢失最优解）属于贪心的范畴，可能提高了“溯源”的难度。</p>
+<p>首先注意：动态规划不是说一上来就写状态转移方程（直接做“备忘录”），而是逐步分析，如下：</p>
+<p>分析最优子结构 -&gt; 递推公式 -&gt; 自底向上求解（初始化、状态转移）</p>
+<p>分析技巧： 递归树、状态转移图</p>
+<p>调试技巧：打印 dp 数组</p>
+<p>如果需要“溯源”，可以开一个新数组标记。</p>
+<p>由于需要状态转移，一般数组下标从1开始，对应的<code>dp</code>数组也开有“安全空间”。</p>
+<h3 id="背包-dp"><a href="#背包-dp" class="headerlink" title="背包 dp"></a>背包 dp</h3><p>####背包问题的基本状态转移方程</p>
+<p>f[j] 表示处理到当前物品 i 时背包容量为 j 的最大价值，得出以下方程：</p>
+<p><img src="C:\Users\ll\blog\source_posts\贴图\20210806dp1.png" alt="image-20210806174605728"></p>
+<h4 id="0-1背包问题"><a href="#0-1背包问题" class="headerlink" title="0-1背包问题"></a>0-1背包问题</h4><p>注意：关于 j 的循环是逆向的。<strong>为了保证物品i只被放入一次！</strong>从后往前循环，每次取得状态<strong>不会和之前取得状态重合</strong>（也就是要求子问题之间互相独立），这样每种物品就只取一次了。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">for (int i &#x3D; 0; i &lt; n; i++) &#123;
+        for (int j &#x3D; m; j &gt;&#x3D; w[i]; j--) &#123;
+            dp[j] &#x3D; max(dp[j], dp[j - w[i]] + v[i]);
+        &#125;
+    &#125;</code></pre>
+
+<h4 id="0-1背包问题打印方案"><a href="#0-1背包问题打印方案" class="headerlink" title="0-1背包问题打印方案"></a>0-1背包问题打印方案</h4><p>对于滚动数组方法，由于少存储了很多数据，所以很难溯源。</p>
+<p>我们先来看二维情况下，背包问题的循环遍历顺序：</p>
+<p>1.当然，传统地（i++,j++）是可行的。并且可以边读边计算。</p>
+<p>2.<strong>先遍历容量，再遍历物品，也是可以的！</strong>虽然两个for循环遍历的次序不同，但是<code>dp[i][j]</code>所需要的状态来自左上角，不影响<code>dp[i][j]</code>的下标和状态转移。</p>
+<p>3.能否<strong>逆序遍历物品</strong>？需要经过小小地修改。此时，用dp[i,j]表示 把第 i, i＋1, i＋2,…, n 个物品装到容量为j的背包中的最大总重量。也就是说，“对称”了一下：</p>
+<p>由于下标的意义变化，其状态转移方程也要发生改变：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">for(i &#x3D; n; i &gt;&#x3D; 1; i--)
+for(j &#x3D; 0; j &lt;&#x3D; C; j++) 
+if(j &gt;&#x3D; V[i]) 
+	d[i][j]&#x3D;max(d[i+1][j],d[i＋1][j－V[i]]＋W[i]);&#x2F;&#x2F;！
+else  
+    d[i][j]&#x3D; d[i+1][j]；</code></pre>
+
+<p>当然，最后我们的输出的结果也就为最终的 <code>dp[1][C]</code>了。</p>
+<p>我们可以总结一下：循环的遍历顺序和状态转移的方向最好是对应的！这和我们提到过的子问题之间互相独立也是一致的。</p>
+<p>4.能否<strong>逆序遍历容量</strong>？类似于3的思路，但比较难理解，略。</p>
+<p>对于打印方案，可以按照（i++，j++）的方案结合标志数组记录回溯，如果有<strong>字典序最小</strong>的要求，最终需要<code>reverse</code>；另一种想法是上面的第3点，不需要<code>reverse</code>。以下是示例代码：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int dp[MAX_N][MAX_N];
+int dp_d[MAX_N][MAX_N];
+int N, V;&#x2F;&#x2F;n - 物品数，v - 容量（体积） w - 价值
+vector&lt;int&gt; w(1, 0);
+vector&lt;int&gt; v(1, 0);
+
+int main() &#123;
+    &#x2F;&#x2F;INPUT
+    memset(dp, 0, sizeof dp);
+    memset(dp_d, 0, sizeof dp_d);
+
+	&#x2F;&#x2F;DP
+    for (int i &#x3D; N; i &gt; 0; i--) &#123;
+        for (int j &#x3D; 0; j &lt;&#x3D; V; j++) &#123;
+            int noti &#x3D; dp[i + 1][j];
+            int geti &#x3D; j &gt;&#x3D; v[i] ? dp[i + 1][j - v[i]] + w[i] : 0;
+            &#x2F;&#x2F;for (int j &#x3D; v[i]; j &lt;&#x3D; V; j++)不可！why？遍历不完全！（dp本质）
+            if (noti &gt; geti) &#123;&#x2F;&#x2F;不能用&gt;&#x3D; 不然多解时会出错
+                dp[i][j] &#x3D; noti;
+                dp_d[i][j] &#x3D; 1;
+            &#125; else &#123;
+                dp[i][j] &#x3D; geti;
+                dp_d[i][j] &#x3D; 2;
+            &#125;
+        &#125;
+    &#125;
+    &#x2F;&#x2F;DP_D
+    vector&lt;int&gt; ans;
+    int i &#x3D; 1 ,  j &#x3D; V;
+    while (i &lt;&#x3D; N &amp;&amp; j &gt; 0) &#123;
+        switch (dp_d[i][j]) &#123;
+            case 1:
+                i++;
+                break;
+            case 2:
+                if (j &gt;&#x3D; v[i])&#x2F;&#x2F;一个补丁，bug以后补坑
+                    ans.push_back(i);
+                j -&#x3D; v[i];
+                i++;
+                break;
+        &#125;
+    &#125;
+    for (auto i : ans) &#123;
+        cout &lt;&lt; i &lt;&lt; &quot; &quot;;
+    &#125;
+&#125;
+</code></pre>
+
+
+
+<h4 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h4><p>注意：关于 j 的循环是正向的。</p>
+<pre class="line-numbers language-none"><code class="language-none">for (int i &#x3D; 0; i &lt; m; i++) &#123;
+        for (int j &#x3D; t[i]; j &lt;&#x3D; T; j++) &#123;
+            dp[j] &#x3D; max(dp[j], dp[j - t[i]] + v[i]);
+        &#125;
+    &#125;</code></pre>
+
+<p>Tips：解题时，注意数据范围，选择合适的数据结构（eg.long long，_int128）。</p>
+<p><strong>完全背包和 01 背包的区别就在于对容量限制枚举的顺序不同</strong></p>
+<p>原因：0-1背包问题的状态转移利用的是“上一个状态”，完全背包利用的是“当前状态”。</p>
+]]></content>
+      <categories>
+        <category>算法基础</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>谈谈我对艺术的理解</title>
+    <url>//post/%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9%E8%89%BA%E6%9C%AF%E7%9A%84%E7%90%86%E8%A7%A3.html</url>
+    <content><![CDATA[<h1 id="艺术"><a href="#艺术" class="headerlink" title="艺术"></a>艺术</h1><p>[TOC]</p>
+<p>【内容产出中】</p>
+<p>近来身体良好，灵感迸发，借此良机，抒发笔者对艺术所感，同时借以小憩。</p>
+<p>艺术，听似很有逼格的词语，其实也可以很接地气。艺术，不仅仅是在798艺术中心里，用不同的理论和方法表现出富有冲击力的美感和画面，也可以是用各种形式对生活的记录。</p>
+<h2 id="信息的记录"><a href="#信息的记录" class="headerlink" title="信息的记录"></a>信息的记录</h2><p>身临其境之时，方是全身心投入环境的好时机。画作，是一种精湛的技术，由点到面，从细节到整体，一步步勾勒出自己的心灵想象；音乐，是一种共情的表达，用乐器和音符构筑开阔或是幽美的想象空间。摄影，是一种宝贵的记忆，每一张照片都是独一无二的，其角度和参数都涵盖摄影者的巧思。</p>
+<p>曾经我以为，在信息高速发展的浪潮下，我想去的地方，其景象能够由照片看见，其声音可以由midi生成，其氛围亦可由文字所构造，如果配以虚拟导游，我可能真的不必费心破财亲临其境，更不用拍摄下、记录下当时的所见所感。</p>
+<p>非也，以上的想法都是在接收信息，而信息的记录及后期处理、亲临其境的感受，那都是心灵的创造，是一种美的艺术。</p>
+<h3 id="当下"><a href="#当下" class="headerlink" title="当下"></a>当下</h3><p>###个性化</p>
+<p>##信息的处理</p>
+<p>运用python爬取到想要的资料自然是增强了科技处理的信心，想到这里，大一时真的不够自信</p>
+<h3 id="二创和个性变化"><a href="#二创和个性变化" class="headerlink" title="二创和个性变化"></a>二创和个性变化</h3><p>###启发式处理</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>//post/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E5%AF%BC%E8%AE%BA.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>//post/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E8%80%83%E8%AF%95%E4%B8%AD%E7%9A%84%E9%9D%9E%E4%B8%BB%E6%B5%81%E7%8E%A9%E6%B3%95.html</url>
+    <content><![CDATA[<p>[toc]</p>
+<p>实际考试中的数据结构题目会比平时代码常用的东西多一点。在此提纲掣领地做一复习。</p>
+<h1 id="非常规队列"><a href="#非常规队列" class="headerlink" title="非常规队列"></a>非常规队列</h1><h2 id="顺序的环形实现"><a href="#顺序的环形实现" class="headerlink" title="顺序的环形实现"></a>顺序的环形实现</h2><p>顺序队列在数据不断地进队出队过程中，在顺序表中的位置不断后移。</p>
+<p>可以使用巧妙的方法将顺序表打造成一个环状表，如图 ：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6567790-e5806e91d36f67b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt="img"></p>
+<p>在真正的实现时，没必要真创建这样一种结构，可以通过增加取模、判断（到达队尾返回开头）的方式实现。</p>
+<h2 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h2><p>队头指针front指向队头元素的前一位置，而队尾指针rear指向队尾元素。</p>
+<p>为解决如何判断队列的满与空问题，牺牲一个存储单元。</p>
+<h2 id="栈浮动技术"><a href="#栈浮动技术" class="headerlink" title="栈浮动技术"></a>栈浮动技术</h2><p>两个栈共享一组地址连续的存储单元。</p>
+<p>略。</p>
+<h1 id="广义表"><a href="#广义表" class="headerlink" title="广义表"></a>广义表</h1><h2 id="稀疏矩阵的存储"><a href="#稀疏矩阵的存储" class="headerlink" title="稀疏矩阵的存储"></a>稀疏矩阵的存储</h2><h3 id="三元组存储及快速转置"><a href="#三元组存储及快速转置" class="headerlink" title="三元组存储及快速转置"></a>三元组存储及快速转置</h3><p><img src="C:\Users\ll\blog\source_posts\贴图\350.png" alt="img"></p>
+<p>关键步骤：以 j 为序列，重新排列三元组表中存储各三元组的先后顺序。</p>
+<ol>
+<li>在普通算法的基础上增设两个数组（ array 和 copt）：</li>
+</ol>
+<ul>
+<li><p>array 数组负责记录原矩阵每一列非 0 元素的个数。例子对应的 array 数组：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6567790-164e9998c2c3026d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200" alt="img"></p>
+</li>
+<li><p>copt 数组用于计算稀疏矩阵中每列第一个非 0 元素在<strong>新</strong>三元组表中存放的位置，示例对应的 copt 数组如图 ：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6567790-22df260c67063f1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200" alt="img"></p>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">cpot[1]&#x3D;1
+cpot[col]&#x3D;cpot[col-1] +array[col-1]	(col &gt; 1)&#x2F;&#x2F;意思是，后一列首个非 0 元素存放的位置等于前一列首个非 0 元素的存放位置,加上该列非 0 元素的个数。由此可以看出，copt 数组才是最终想要的，而 array 数组的设立只是为了帮助我们得到 copt 数组。</code></pre>
+
+
+
+<h3 id="行逻辑链接顺序表"><a href="#行逻辑链接顺序表" class="headerlink" title="行逻辑链接顺序表"></a>行逻辑链接顺序表</h3><p>当使用行逻辑链接的顺序表对其进行压缩存储时，需要做以下两个工作：</p>
+<p>1.将矩阵中的非 0 元素采用三元组的形式存储到一维数组 data 中，如图 ：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6567790-d9807ee6236a2bd1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/450" alt="img"></p>
+<p>2.使用数组 rpos 记录矩阵中每行第一个非 0 元素在一维数组中的存储位置。如图:</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6567790-230259eea2644095.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt="img"></p>
+<p><strong>此时，如果想从行逻辑链接的顺序表中提取元素，则可以借助 rpos 数组提高遍历数组的效率。</strong></p>
+<p>例如，提取元素 2 的过程如下：</p>
+<p>由 <code>rpos</code> 数组可知，第一行首个非 0 元素位于data[1]，因此在遍历此行时，可以直接从第 data[1] 的位置开始，一直遍历到下一行首个非 0 元素所在的位置（data[3]）之前</p>
+<h3 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h3><p>为克服三元组表在矩阵的非零元素位置或个数经常变动时的使用不便，矩阵中的各行各列都各用一链表存储，与此同时，所有行链表的表头存储到一个数组（<code>rhead</code>），所有列链表的表头存储到另一个数组（<code>chead</code>）中。各个链表中节点的结构如图:</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6567790-81a62ea7f51afc57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/230" alt="img"></p>
+<p><img src="C:\Users\ll\blog\source_posts\贴图\image-20211123171532586.png" alt="image-20211123171532586"></p>
+<h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><h2 id="线索化"><a href="#线索化" class="headerlink" title="线索化"></a>线索化</h2><blockquote><span class="custom-blockquote-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg" data-reactroot="">
+<path fill="" d="M22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C13.8 22 15.5 21.5 17 20.6L22 22L20.7 17C21.5 15.5 22 13.8 22 12Z" undefined="1"></path>
+<path fill="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z" undefined="1"></path>
+<path fill="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z" undefined="1"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M17 8.5C15.23 8.97 14.07 10.84 14.01 13.27C14 13.33 14 13.4 14 13.47V13.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M9 8.5C7.23 8.97 6.07 10.84 6.01 13.27C6 13.33 6 13.4 6 13.47V13.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z"></path>
+</svg>
+</span><p>二叉链表对于无子树侧的指针域，能否利用这些空闲区存放有用的信息或线索？<br>——可以用它来存放当前结点的直接前驱和后继等线索，以加快查找速度。按照某种方式对二叉树进行遍历，可以把二叉树中所有结点排序为一个线性序列，参考之，可以把一棵二叉树转变成了一个“双向链表“。</p>
+<p>在该序列中，除第一个结点外每个结点有且仅有一个直接前驱结点；除最后一个结点外每一个结点有且仅有一个直接后继结点，由此线索化。</p></blockquote>
+<p>LTag=0, lchild域指向左孩子；LTag=1, lchild域指向其前驱<br>RTag=0, rchild域指向右孩子；RTag=1, rchild域指向其后继 </p>
+<p>在线索二叉树的基础上，额外添加一个结点。此结点的作用类似于链表中的头指针，数据域不起作用，只利用两个指针域：左指针域指向二叉树的树根，确保可以正方向对二叉树进行遍历；同时右指针指向线索二叉树形成的线性序列中的最后一个结点。同时，该节点也可避免”悬空”的情形。</p>
+<h2 id="补充结论"><a href="#补充结论" class="headerlink" title="补充结论"></a>补充结论</h2><h3 id="深入理解二叉树遍历"><a href="#深入理解二叉树遍历" class="headerlink" title="深入理解二叉树遍历"></a>深入理解二叉树遍历</h3><p>非递归中序遍历：</p>
+<ul>
+<li>入栈顺序：先序遍历；</li>
+<li>出栈顺序：中序遍历</li>
+</ul>
+<h3 id="二叉树和森林的互化"><a href="#二叉树和森林的互化" class="headerlink" title="二叉树和森林的互化"></a>二叉树和森林的互化</h3><h4 id="树和二叉树"><a href="#树和二叉树" class="headerlink" title="树和二叉树"></a>树和二叉树</h4><p>回忆我们从树抽象到二叉树的思路：</p>
+<p>将树用“长子 - 兄弟“ 表示法时，转化成对应二叉树的方式：</p>
+<ul>
+<li>从根开始，左子树连接“长子”；</li>
+<li>从根开始，右子树连接“兄弟”；</li>
+</ul>
+<p>由此便知二者互化的原理；</p>
+<h4 id="二叉树和森林"><a href="#二叉树和森林" class="headerlink" title="二叉树和森林"></a>二叉树和森林</h4><p>将森林中的每一棵树均用二叉树的方式抽象表述后，从最后一棵二叉树开始，每棵二叉树作为前一棵二叉树的根结点的右子树，得到森林对应的二叉树。</p>
+<p>所以，将二叉树根沿着右子树链方向的所有边去掉，得到若干棵孤立的二叉树，对应森林中的各棵树对应的二叉树集合。</p>
+<p><img src="C:\Users\ll\blog\source_posts\贴图\webp.webp" alt="img"></p>
+<p>参考：</p>
+<p><a href="https://www.jianshu.com/p/d7d5545012e2">https://www.jianshu.com/p/d7d5545012e2</a></p>
+<h1 id="查找与排序"><a href="#查找与排序" class="headerlink" title="查找与排序"></a>查找与排序</h1><h2 id="分块查找"><a href="#分块查找" class="headerlink" title="分块查找"></a>分块查找</h2><p>n元素分块查找，记b为索引表长度，s为块中记录个数，则：</p>
+<p>当s取$\sqrt{n}$时，$ASL_{bs}$取最小值$\sqrt{n}+1$</p>
+<h1 id="仅限考试用的结论"><a href="#仅限考试用的结论" class="headerlink" title="仅限考试用的结论"></a>仅限考试用的结论</h1><ol>
+<li>树的高度是从1开始算的，也就是说，空树的高度是0。</li>
+<li>试卷中除非自己定义，请默认下标从“1”开始。</li>
+<li>并查集：与主流一致，根节点的值为-1.</li>
+</ol>
+]]></content>
+  </entry>
+</search>
