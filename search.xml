@@ -400,7 +400,7 @@ random_shuffle(a+1,a+n+1);</code></pre>
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>C/C++ 多维数组的处理</title>
     <url>//post/C%E4%B8%AD%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%A4%84%E7%90%86.html</url>
     <content><![CDATA[<p>笔者要用到多维数组的时候经常忘了多维数组怎么用，在此总结一下：</p>
 <p>【内容产出中】</p>
@@ -410,7 +410,6 @@ void bubbleSort(float (*num)[40],int size);
 &#x2F;&#x2F;调用
 bubbleSort( stu , 40);
 &#x2F;&#x2F;思想：二维数组——数组的数组</code></pre>
-
 <p>2.把二维数组当一维数组进行赋值：</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">int *p&#x3D;&amp;a[0][0];&#x2F;&#x2F;获取二维数组首地址
 for(int i&#x3D;0;i&lt;6;i++)
@@ -418,7 +417,6 @@ for(int i&#x3D;0;i&lt;6;i++)
 scnaf(&quot;%d&quot;,p);
 p++;
 &#125;</code></pre>
-
 <p>3.使用 C++ 容器时，若可以使用<code>at</code>等方法获得对应元素，以缓解运算符<code>[]</code>的不稳定性问题。</p>
 <p>如： array（C++11）</p>
 <table>
@@ -428,7 +426,8 @@ p++;
 <th>作用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>at</code></td>
 <td>访问指定的元素，同时进行越界检查<code>at</code> 若遇 <code>pos &gt;= size()</code> 的情况会抛出 <code>std::out_of_range</code>。</td>
 </tr>
@@ -436,11 +435,11 @@ p++;
 <td><code>operator[]</code></td>
 <td>访问指定的元素，<strong>不</strong> 进行越界检查</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>4.多维vector的行列空间预留</p>
 <pre class="line-numbers language-none"><code class="language-none">vector&lt;vector&lt;bool&gt; &gt; table(256);&#x2F;&#x2F;256行
 table.resize(512);&#x2F;&#x2F;512列</code></pre>
-
 ]]></content>
   </entry>
   <entry>
